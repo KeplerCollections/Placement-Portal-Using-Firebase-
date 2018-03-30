@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#233966</color>
+    <color name="colorPrimaryDark">#233966</color>
+    <color name="colorAccent">#FED50A</color>
+    <color name="colorAccent90Opacity">#90FED50A</color>
+    <color name="colorGrey">#6e6e6e</color>
+    <color name="colorGrey90Opacity">#906e6e6e</color>
+    <color name="colorLightGrey">#F2F2F2</color>
+    <color name="colorLightOpacityGrey">#506e6e6e</color>
+    <color name="colorBlue">#0000FF</color>
+
+    <!---->
+    <color name="colorLightOpacityBlack">@color/colorLightGrey</color>
+
+</resources>

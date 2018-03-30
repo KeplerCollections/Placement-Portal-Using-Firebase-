@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.kepler.studentportal.modules.signup.SignUpActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/ten_dp"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/DarkTextAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:text="@string/first_name"
+            android:textAllCaps="true"
+            android:textColor="@color/colorGrey" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/one_dp"
+            android:background="@color/colorGrey" />
+
+
+        <EditText
+            android:id="@+id/et_first_name"
+            style="@style/DarkTextAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:background="@drawable/edit_text"
+            android:hint="@string/first_name"
+            android:inputType="text"
+            android:lines="1" />
+
+        <TextView
+            style="@style/DarkTextAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:text="@string/last_name"
+            android:textAllCaps="true"
+            android:textColor="@color/colorGrey" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/one_dp"
+            android:background="@color/colorGrey" />
+
+        <EditText
+            android:id="@+id/et_last_name"
+            style="@style/DarkTextAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:background="@drawable/edit_text"
+            android:hint="@string/last_name"
+            android:inputType="text"
+            android:lines="1" />
+
+        <TextView
+            style="@style/DarkTextAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:text="@string/email_id"
+            android:textAllCaps="true"
+            android:textColor="@color/colorGrey" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/one_dp"
+            android:background="@color/colorGrey" />
+
+        <EditText
+            android:id="@+id/et_email"
+            style="@style/DarkTextAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:background="@drawable/edit_text"
+            android:hint="@string/email_id"
+            android:inputType="textEmailAddress"
+            android:lines="1" />
+
+        <TextView
+            style="@style/DarkTextAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:text="@string/contact_no"
+
+            android:textAllCaps="true"
+            android:textColor="@color/colorGrey" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/one_dp"
+            android:background="@color/colorGrey" />
+
+        <EditText
+            android:id="@+id/et_contact"
+            style="@style/DarkTextAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:background="@drawable/edit_text"
+            android:hint="@string/contact_no"
+            android:inputType="phone"
+            android:lines="1" />
+
+        <TextView
+            style="@style/DarkTextAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:text="@string/gender"
+            android:textAllCaps="true"
+            android:textColor="@color/colorGrey" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/one_dp"
+            android:background="@color/colorGrey" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:background="@drawable/edit_text"
+            android:orientation="horizontal"
+            android:tooltipText="@string/gender">
+
+
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/female" />
+
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/male" />
+        </RadioGroup>
+
+        <TextView
+            style="@style/DarkTextAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:text="@string/working_experience"
+            android:textAllCaps="true"
+            android:textColor="@color/colorGrey" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/one_dp"
+            android:background="@color/colorGrey" />
+
+        <EditText
+            android:id="@+id/et_experience"
+            style="@style/DarkTextAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:background="@drawable/edit_text"
+            android:hint="@string/hm_experience"
+            android:inputType="phone"
+            android:maxLength="2"
+            android:lines="1" />
+
+
+        <EditText
+            android:id="@+id/et_company"
+            style="@style/DarkTextAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:background="@drawable/edit_text"
+            android:hint="@string/last_company"
+            android:inputType="phone"
+            android:lines="1" />
+
+
+        <EditText
+            android:id="@+id/et_designation"
+            style="@style/DarkTextAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:background="@drawable/edit_text"
+            android:hint="@string/last_designation"
+            android:inputType="phone"
+            android:lines="1" />
+
+        <CheckBox
+            android:layout_marginTop="@dimen/ten_dp"
+            android:layout_width="match_parent"
+            android:text="@string/accept_t_c"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/b_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/twenty_dp"
+            android:background="@drawable/button_selector"
+            android:text="@string/sign_up" />
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/ten_dp">
+
+    <TextView
+        android:id="@+id/txt_company_name"
+        style="@style/DarkTextAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:text="TCS" />
+
+    <TextView
+        android:id="@+id/txt_company_website"
+        style="@style/DarkTextAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:text="www.tcsinfo.com"
+        android:textColor="@color/colorBlue" />
+
+    <TextView
+        android:id="@+id/txt_company_email_id"
+        style="@style/DarkTextAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:text="tcspvt@info.com"
+        android:textColor="@color/colorGrey" />
+
+    <TextView
+        android:id="@+id/txt_company_address"
+        style="@style/DarkTextAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:text="2- Shiv Plaza"
+        android:textColor="@color/colorGrey" />
+</LinearLayout>
