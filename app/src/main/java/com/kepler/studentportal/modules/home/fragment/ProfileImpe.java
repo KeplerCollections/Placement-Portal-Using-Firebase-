@@ -51,4 +51,12 @@ public class ProfileImpe extends BasePresenterImpl<VPLogiv.ProfileView> implemen
         view.showProgress(R.string.loading);
         ApiClient.getClientService().getUser(username).enqueue(this);
     }
+
+    @Override
+    public void updateUser(User user) {
+        if (view == null)
+            return;
+        view.showProgress(R.string.loading);
+        ApiClient.getClientService().updateUser(user).enqueue(this);
+    }
 }

@@ -38,13 +38,12 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobHolder> {
 
     @Override
     public void onBindViewHolder(JobHolder holder, final int position) {
-//        holder.imageView.setImageResource(R.drawable.ic_action_favorite);
-//        holder.bind(detailsList.get(position));
+        holder.bind(detailsList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return detailsList.size();
     }
 
     public class JobHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -60,11 +59,15 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobHolder> {
         }
 
         public void bind(JobDetails jobDetails) {
+            txt_job_name.setText(jobDetails.getJob_profile());
+            txt_job_website.setText(jobDetails.getJob_apply_url());
+            txt_job_exp.setText("Experience : "+jobDetails.getJob_min_exp_req()+"-"+jobDetails.getJob_max_exp_req());
+            txt_job_email_id.setText("Address : "+jobDetails.getInterview_vanue());
         }
 
         @Override
         public void onClick(View v) {
-//            onItemClickListener.OnItemClickListener(detailsList.get(getAdapterPosition()));
+            onItemClickListener.OnItemClickListener(detailsList.get(getAdapterPosition()));
         }
     }
 }

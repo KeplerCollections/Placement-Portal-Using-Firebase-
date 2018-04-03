@@ -76,8 +76,10 @@ public class Otp extends MVPFragment<VPLogiv.FpOtpSendPresenter> implements VPLo
     @Override
     public void otpSent(BaseResponse response) throws Exception {
         if (response.isStatus()) {
+            showToast(R.string.otp_sent);
             Bundle bundle=new Bundle();
             bundle.putString(ApiClient.OTP,"123456");
+            bundle.putString(ApiClient.USERNAME,et_username.getText().toString());
             fragmentCommunicator.replaceFragment(VerifyOtp.getInstance(), bundle, false);
         } else {
             fragmentCommunicator.showDialog(response.getMessage(),null, Logger.DIALOG_ALERT);

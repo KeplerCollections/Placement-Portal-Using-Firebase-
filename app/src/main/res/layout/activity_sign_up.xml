@@ -9,8 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/ten_dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="@dimen/ten_dp">
 
         <TextView
             style="@style/DarkTextAppearanceMedium"
@@ -109,9 +109,35 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/ten_dp"
+            android:maxLength="10"
             android:background="@drawable/edit_text"
             android:hint="@string/contact_no"
             android:inputType="phone"
+            android:lines="1" />
+
+        <TextView
+            style="@style/DarkTextAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:text="@string/password"
+            android:textAllCaps="true"
+            android:textColor="@color/colorGrey" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/one_dp"
+            android:background="@color/colorGrey" />
+
+        <EditText
+            android:id="@+id/et_password"
+            style="@style/DarkTextAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:background="@drawable/edit_text"
+            android:hint="@string/password_6"
+            android:inputType="textPassword"
             android:lines="1" />
 
         <TextView
@@ -129,6 +155,7 @@
             android:background="@color/colorGrey" />
 
         <RadioGroup
+            android:id="@+id/gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/ten_dp"
@@ -138,17 +165,99 @@
 
 
             <RadioButton
+                android:id="@+id/female"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:checked="true"
+                android:tag="F"
                 android:text="@string/female" />
 
             <RadioButton
+                android:id="@+id/male"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:tag="M"
                 android:text="@string/male" />
         </RadioGroup>
+
+        <TextView
+            style="@style/DarkTextAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:text="@string/education"
+            android:textAllCaps="true"
+            android:textColor="@color/colorGrey" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/one_dp"
+            android:background="@color/colorGrey" />
+
+        <com.nex3z.flowlayout.FlowLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/add_highschool"
+                style="@style/DarkTextAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/five_dp"
+                android:background="@drawable/button_selector"
+                android:clickable="true"
+                android:padding="@dimen/five_dp"
+                android:tag="10"
+                android:text="@string/add_highschool" />
+
+            <TextView
+                android:id="@+id/add_intermediate"
+                style="@style/DarkTextAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/five_dp"
+                android:background="@drawable/button_selector"
+                android:clickable="true"
+                android:padding="@dimen/five_dp"
+                android:tag="12"
+                android:text="@string/add_intermediate" />
+
+            <TextView
+                android:id="@+id/add_graduation"
+                style="@style/DarkTextAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/five_dp"
+                android:background="@drawable/button_selector"
+                android:clickable="true"
+                android:padding="@dimen/five_dp"
+                android:tag="14"
+                android:text="@string/add_graduation" />
+
+            <TextView
+                android:id="@+id/add_post_graduation"
+                style="@style/DarkTextAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/five_dp"
+                android:background="@drawable/button_selector"
+                android:clickable="true"
+                android:padding="@dimen/five_dp"
+                android:tag="16"
+                android:text="@string/add_post_graduation" />
+
+
+        </com.nex3z.flowlayout.FlowLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_education"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
 
         <TextView
             style="@style/DarkTextAppearanceMedium"
@@ -173,8 +282,8 @@
             android:background="@drawable/edit_text"
             android:hint="@string/hm_experience"
             android:inputType="phone"
-            android:maxLength="2"
-            android:lines="1" />
+            android:lines="1"
+            android:maxLength="2" />
 
 
         <EditText
@@ -185,7 +294,7 @@
             android:layout_marginTop="@dimen/ten_dp"
             android:background="@drawable/edit_text"
             android:hint="@string/last_company"
-            android:inputType="phone"
+            android:inputType="text"
             android:lines="1" />
 
 
@@ -197,14 +306,15 @@
             android:layout_marginTop="@dimen/ten_dp"
             android:background="@drawable/edit_text"
             android:hint="@string/last_designation"
-            android:inputType="phone"
+            android:inputType="text"
             android:lines="1" />
 
         <CheckBox
-            android:layout_marginTop="@dimen/ten_dp"
+            android:id="@+id/terms_and_condition"
             android:layout_width="match_parent"
-            android:text="@string/accept_t_c"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:text="@string/accept_t_c" />
 
         <Button
             android:id="@+id/b_register"

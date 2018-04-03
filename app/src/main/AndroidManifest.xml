@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kepler.studentportal">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -33,7 +34,10 @@
         <activity
             android:name=".modules.Job.JobActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".modules.signup.SignUpActivity"></activity>
+        <activity android:name=".modules.signup.SignUpActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".modules.signup.AddEducation"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

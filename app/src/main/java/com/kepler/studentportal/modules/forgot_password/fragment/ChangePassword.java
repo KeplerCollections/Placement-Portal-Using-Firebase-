@@ -10,6 +10,7 @@ import com.kepler.projectsupportlib.Logger;
 import com.kepler.projectsupportlib.MVPFragment;
 import com.kepler.studentportal.R;
 import com.kepler.studentportal.VPLogiv;
+import com.kepler.studentportal.api.ApiClient;
 import com.kepler.studentportal.api.BaseResponse;
 import com.kepler.studentportal.modules.login.LoginActivity;
 import com.kepler.studentportal.support.PrefManager;
@@ -49,15 +50,17 @@ public class ChangePassword extends MVPFragment<VPLogiv.ChangePasswordPresenter>
         b_change_password.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (et_password.getText().toString().isEmpty()) {
-                    fragmentCommunicator.showDialog(R.string.err_field_is_empty, null, Logger.DIALOG_ERROR);
+                if (et_password.getText().toString().trim().isEmpty() || et_password.getText().toString().length() < 6) {
+                    et_password.setError(getString(R.string.err_field_is_not_valid));
+                    et_password.requestFocus();
                     return;
                 }
-                if (!et_password.getText().toString().equals(et_confirm_password.getText().toString())) {
-                    fragmentCommunicator.showDialog(R.string.err_password_not_matched, null, Logger.DIALOG_ERROR);
+                if (!et_confirm_password.getText().toString().equals(et_confirm_password.getText().toString())) {
+                    et_confirm_password.setError(getString(R.string.err_password_not_matched));
+                    et_confirm_password.requestFocus();
                     return;
                 }
-                presenter.changePassword(PrefManager.getPrefrences(getActivity()).getUsername(), et_password.getText().toString());
+                presenter.changePassword((getArguments() ==null) ? null : getArguments().getString(ApiClient.USERNAME,null), et_password.getText().toString());
 
             }
         });
@@ -88,6 +91,8 @@ public class ChangePassword extends MVPFragment<VPLogiv.ChangePasswordPresenter>
     @Override
     public void passwordChanged(BaseResponse response) throws Exception {
         if (response.isStatus()) {
+            PrefManager.getPrefrences(getActivity()).logout();
+            showToast(R.string.password_changed);
             startActivity(LoginActivity.class);
             getActivity().finish();
         } else {

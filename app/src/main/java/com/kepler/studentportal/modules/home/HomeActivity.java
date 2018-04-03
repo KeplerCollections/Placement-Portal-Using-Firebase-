@@ -23,6 +23,8 @@ import com.kepler.studentportal.support.PrefManager;
 
 import butterknife.BindView;
 
+import static com.kepler.studentportal.api.ApiClient.USERNAME;
+
 public class HomeActivity extends BaseActivity {
 
     @BindView(R.id.bottom_navigation)
@@ -120,7 +122,9 @@ public class HomeActivity extends BaseActivity {
                 return true;
 
             case R.id.action_change_password:
-                replaceFragment(ChangePassword.getInstance(), null, false);
+                Bundle bundle=new Bundle();
+                bundle.putString(USERNAME, PrefManager.getPrefrences(getApplicationContext()).getUsername());
+                replaceFragment(ChangePassword.getInstance(), bundle, false);
 
                 return true;
 

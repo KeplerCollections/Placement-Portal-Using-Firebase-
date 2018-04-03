@@ -100,6 +100,12 @@ public abstract class BaseActivity extends AppCompatActivity implements Fragment
         Intent intent = new Intent(this, aClass);
         startActivity(intent);
     }
+    protected void startActivity(@NonNull Class<? extends BaseActivity> aClass, Bundle bundle,int request_code) {
+        Intent intent = new Intent(this, aClass);
+        if (bundle != null)
+            intent.putExtras(bundle);
+        startActivityForResult(intent,request_code);
+    }
 
     protected void startActivity(@NonNull Class<? extends BaseActivity> aClass, int flags) {
         Intent intent = new Intent(this, aClass);

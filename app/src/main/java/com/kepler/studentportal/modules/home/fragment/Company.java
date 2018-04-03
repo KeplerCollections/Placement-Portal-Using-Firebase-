@@ -13,6 +13,7 @@ import com.kepler.projectsupportlib.MVPFragment;
 import com.kepler.studentportal.R;
 import com.kepler.studentportal.VPLogiv;
 import com.kepler.studentportal.adapter.CompanyAdapter;
+import com.kepler.studentportal.api.ApiClient;
 import com.kepler.studentportal.api.ApiResponse;
 import com.kepler.studentportal.dao.CompanyDetails;
 import com.kepler.studentportal.modules.Job.JobActivity;
@@ -79,7 +80,8 @@ public class Company extends MVPFragment<VPLogiv.CompanyViewPresenter> implement
                 @Override
                 public void OnItemClickListener(CompanyDetails value) {
                     Bundle bundle=new Bundle();
-                    bundle.putString(Constants.TITLE,"");
+                    bundle.putString(Constants.TITLE,value.getCompany_name());
+                    bundle.putString(ApiClient.COMPANY_ID,value.getCompany_id());
                     startActivity(JobActivity.class,bundle);
                 }
             });

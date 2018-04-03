@@ -7,13 +7,17 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.kepler.projectsupportlib.BaseFragment;
+import com.kepler.projectsupportlib.Logger;
 import com.kepler.projectsupportlib.MVPFragment;
 import com.kepler.studentportal.R;
 import com.kepler.studentportal.VPLogiv;
 import com.kepler.studentportal.api.ApiClient;
 import com.kepler.studentportal.api.ApiResponse;
+import com.kepler.studentportal.support.PrefManager;
 
 import butterknife.BindView;
+
+import static com.kepler.studentportal.api.ApiClient.USERNAME;
 
 /**
  * Created by kepler on 28/3/18.
@@ -42,7 +46,11 @@ public class VerifyOtp extends BaseFragment{
           @Override
           public void onClick(View v) {
               if(et_otp.getText().toString().equals((getArguments()==null)? "" : getArguments().getString(ApiClient.OTP,""))){
-                  fragmentCommunicator.replaceFragment(ChangePassword.getInstance(),null,false);
+                  Bundle bundle=new Bundle();
+                  bundle.putString(USERNAME, getArguments().getString(USERNAME,null));
+                  fragmentCommunicator.replaceFragment(ChangePassword.getInstance(),bundle,false);
+              }else {
+                  fragmentCommunicator.showDialog(R.string.invalid_otp,null, Logger.DIALOG_ALERT);
               }
           }
       });

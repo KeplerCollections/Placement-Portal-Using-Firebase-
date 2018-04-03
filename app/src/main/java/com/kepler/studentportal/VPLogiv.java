@@ -100,6 +100,7 @@ public class VPLogiv {
 
     public interface ProfileViewPresenter extends MVP.BasePresenter<ProfileView> {
         void getUser(String username);
+        void updateUser(User user);
     }
 
 

@@ -50,8 +50,8 @@ public class PrefManager {
 
     public String getUsername(){
         if(shardPref!=null){
-            return shardPref.getString(USERNAME,"");
+            return shardPref.getString(USERNAME,null);
         }
-        return "";
+        return null;
     }
 }

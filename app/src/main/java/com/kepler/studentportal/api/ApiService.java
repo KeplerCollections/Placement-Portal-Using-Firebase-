@@ -46,6 +46,9 @@ public interface ApiService {
     @GET("controller.php?action=getUser")
     Call<ApiResponse<User>> getUser(@Query(USERNAME) String username);
 
+    @POST("controller.php?action=updateUser")
+    Call<ApiResponse<User>> updateUser(@Body User user);
+
     @FormUrlEncoded
     @POST("controller.php?action=changePassword")
     Call<BaseResponse> changePassword(@Field(USERNAME) String user_name, @Field(PASSWORD) String password);

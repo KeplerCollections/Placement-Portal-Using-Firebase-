@@ -1,6 +1,7 @@
 package com.kepler.studentportal.modules.home.fragment;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,9 @@ import com.kepler.studentportal.api.ApiResponse;
 import com.kepler.studentportal.dao.JobDetails;
 import com.kepler.studentportal.modules.Job.JobActivity;
 import com.kepler.studentportal.support.Constants;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -83,7 +87,7 @@ public class Search extends MVPFragment<VPLogiv.SearchViewPresenter> implements 
         if(response.isStatus()){
             Bundle bundle=new Bundle();
             bundle.putString(Constants.TITLE,getResources().getString(R.string.search));
-            bundle.putParcelable(Constants.DATA,(JobDetails)response.getData());
+            bundle.putParcelableArrayList(Constants.DATA, (ArrayList<JobDetails>) response.getData());
             startActivity(JobActivity.class,bundle);
         }else {
             fragmentCommunicator.showDialog(response.getMessage(),null, Logger.DIALOG_ALERT);
