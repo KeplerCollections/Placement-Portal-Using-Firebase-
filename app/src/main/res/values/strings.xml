@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Student Portal</string>
+    <string name="app_name">Amity Placement\nApp</string>
     <string name="okay">Okay</string>
     <string name="sure">Sure</string>
     <string name="confirm">Confirm</string>
@@ -16,7 +16,7 @@
     <string name="category">Category</string>
     <string name="skill">Skill</string>
     <string name="qualification">Qualification</string>
-    <string name="username">Username</string>
+    <string name="username">@string/pls_enter_mobile_no</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="sign_up">Sign Up</string>
@@ -43,16 +43,22 @@
     <string name="last_company">Last Company</string>
     <string name="last_designation">Last Designation</string>
     <string name="accept_t_c">I accept all terms and conditions.</string>
+    <string name="authenticating">Authenticating</string>
+    <string name="logged_in">Logged In</string>
+    <string name="sending">Sending</string>
+    <string name="err_password_not_matched">Password Not Matched</string>
+    <string name="err_field_is_empty">Required Field Is Empty</string>
+    <string name="loading">Loading</string>
 
     <!--arrays-->
     <string-array name="category">
-        <item>@string/category</item>
+        <item>IT</item>
     </string-array>
     <string-array name="skill">
-        <item>@string/skill</item>
+        <item>JAVA</item>
     </string-array>
     <string-array name="qualification">
-        <item>@string/qualification</item>
+        <item>MCA</item>
     </string-array>
 
 </resources>

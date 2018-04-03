@@ -6,4 +6,5 @@ package com.kepler.studentportal.support;
 
 public class Constants {
     public static final String TITLE="title";
+    public static final String DATA="data";
 }

@@ -17,6 +17,7 @@
             style="@style/DarkTextAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLength="10"
             android:hint="@string/pls_enter_mobile_no"
             android:inputType="number"
             android:lines="1" />

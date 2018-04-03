@@ -10,9 +10,11 @@ import android.widget.TextView;
 import com.kepler.projectsupportlib.MVPActivity;
 import com.kepler.studentportal.R;
 import com.kepler.studentportal.VPLogiv;
+import com.kepler.studentportal.api.BaseResponse;
 import com.kepler.studentportal.modules.forgot_password.ForgotPassword;
 import com.kepler.studentportal.modules.home.HomeActivity;
 import com.kepler.studentportal.modules.signup.SignUpActivity;
+import com.kepler.studentportal.support.PrefManager;
 
 import butterknife.BindView;
 
@@ -31,7 +33,7 @@ public class LoginActivity extends MVPActivity<VPLogiv.LoginPresenter> implement
 
     @Override
     protected VPLogiv.LoginPresenter createPresenter() {
-        return null;
+        return new LoginImpe();
     }
 
     @Override
@@ -59,21 +61,26 @@ public class LoginActivity extends MVPActivity<VPLogiv.LoginPresenter> implement
     }
 
     @Override
-    public void showFailureError(int message) {
-
+    public void showProgress(int message) {
+        showProgressBar(message);
     }
 
     @Override
-    public void loggedIn() {
-
+    public void dismiss() {
+        dismissProgressBar();
     }
+
+    @Override
+    public void showFailureError(int message) {
+        showErrorDialog(getString(message), null);
+    }
+
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.b_login:
-                startActivity(HomeActivity.class);
-                finish();
+                presenter.login(et_username.getText().toString(), et_password.getText().toString());
                 break;
             case R.id.b_signup:
                 startActivity(SignUpActivity.class);
@@ -81,6 +88,19 @@ public class LoginActivity extends MVPActivity<VPLogiv.LoginPresenter> implement
             case R.id.tv_forgot_password:
                 startActivity(ForgotPassword.class);
                 break;
+        }
+    }
+
+
+    @Override
+    public void loggedIn(BaseResponse response) throws Exception {
+        if (response.isStatus()) {
+            showToast(R.string.logged_in);
+            PrefManager.getPrefrences(getApplicationContext()).loggedIn(response.getMessage());
+            startActivity(HomeActivity.class);
+            finish();
+        } else {
+            showAlertDialog(response.getMessage(), null);
         }
     }
 }

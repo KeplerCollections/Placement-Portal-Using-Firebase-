@@ -7,11 +7,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.kepler.OnItemClickListener;
+import com.kepler.projectsupportlib.Logger;
+import com.kepler.studentportal.OnItemClickListener;
 import com.kepler.projectsupportlib.MVPFragment;
 import com.kepler.studentportal.R;
 import com.kepler.studentportal.VPLogiv;
 import com.kepler.studentportal.adapter.CompanyAdapter;
+import com.kepler.studentportal.api.ApiResponse;
 import com.kepler.studentportal.dao.CompanyDetails;
 import com.kepler.studentportal.modules.Job.JobActivity;
 import com.kepler.studentportal.support.Constants;
@@ -37,24 +39,13 @@ public class Company extends MVPFragment<VPLogiv.CompanyViewPresenter> implement
 
     @Override
     protected VPLogiv.CompanyViewPresenter createPresenter() {
-        return null;
+        return new CompanyImpe();
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rv_list.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-        CompanyAdapter companyAdapter  = new CompanyAdapter(null, getActivity(), new OnItemClickListener<CompanyDetails>() {
-            @Override
-            public void OnItemClickListener(CompanyDetails value) {
-                Bundle bundle=new Bundle();
-                bundle.putString(Constants.TITLE,"TCS Jobs");
-                startActivity(JobActivity.class,bundle);
-            }
-        });
-        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        rv_list.setLayoutManager(horizontalLayoutManager);
-        rv_list.setAdapter(companyAdapter);
+        presenter.loadCompanies();
     }
 
     @Override
@@ -63,12 +54,40 @@ public class Company extends MVPFragment<VPLogiv.CompanyViewPresenter> implement
     }
 
     @Override
-    public void showFailureError(int message) {
-
+    public void showProgress(int message) {
+        fragmentCommunicator.showProgressBar(message);
     }
 
     @Override
-    public void updateView() {
+    public void dismiss() {
+        fragmentCommunicator.dismissProgressBar();
+    }
 
+
+    @Override
+    public void showFailureError(int message) {
+        fragmentCommunicator.showDialog(message,null, Logger.DIALOG_ERROR);
+
+    }
+
+
+    @Override
+    public void updateView(ApiResponse response) {
+        if(response.isStatus()){
+            rv_list.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+            CompanyAdapter companyAdapter  = new CompanyAdapter(response.getData(), getActivity(), new OnItemClickListener<CompanyDetails>() {
+                @Override
+                public void OnItemClickListener(CompanyDetails value) {
+                    Bundle bundle=new Bundle();
+                    bundle.putString(Constants.TITLE,"");
+                    startActivity(JobActivity.class,bundle);
+                }
+            });
+            LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+            rv_list.setLayoutManager(horizontalLayoutManager);
+            rv_list.setAdapter(companyAdapter);
+        }else {
+            fragmentCommunicator.showDialog(response.getMessage(),null, Logger.DIALOG_ALERT);
+        }
     }
 }

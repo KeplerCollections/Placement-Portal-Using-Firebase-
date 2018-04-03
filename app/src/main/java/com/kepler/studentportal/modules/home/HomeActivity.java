@@ -19,6 +19,7 @@ import com.kepler.studentportal.modules.home.fragment.ContactUs;
 import com.kepler.studentportal.modules.home.fragment.Profile;
 import com.kepler.studentportal.modules.home.fragment.Search;
 import com.kepler.studentportal.modules.login.LoginActivity;
+import com.kepler.studentportal.support.PrefManager;
 
 import butterknife.BindView;
 
@@ -108,8 +109,12 @@ public class HomeActivity extends BaseActivity {
                 showConfirmationDialog(getResources().getString(R.string.logout_message), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(LoginActivity.class);
-                        finish();
+                        if(PrefManager.getPrefrences(getApplicationContext()).logout()){
+                            startActivity(LoginActivity.class);
+                            finish();
+                        }else {
+                            showAlertDialog("Failed to logout",null);
+                        }
                     }
                 });
                 return true;

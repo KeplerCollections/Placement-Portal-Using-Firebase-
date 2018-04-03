@@ -7,9 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.kepler.OnItemClickListener;
+import com.kepler.studentportal.OnItemClickListener;
 import com.kepler.studentportal.R;
-import com.kepler.studentportal.dao.CompanyDetails;
 import com.kepler.studentportal.dao.JobDetails;
 
 import java.util.List;

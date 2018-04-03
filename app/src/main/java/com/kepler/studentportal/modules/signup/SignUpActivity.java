@@ -8,6 +8,8 @@ import android.widget.ProgressBar;
 import com.kepler.projectsupportlib.MVPActivity;
 import com.kepler.studentportal.R;
 import com.kepler.studentportal.VPLogiv;
+import com.kepler.studentportal.api.ApiResponse;
+import com.kepler.studentportal.api.BaseResponse;
 import com.kepler.studentportal.modules.login.LoginActivity;
 
 import butterknife.BindView;
@@ -51,12 +53,22 @@ public class SignUpActivity extends MVPActivity<VPLogiv.SignUpPresenter> impleme
     }
 
     @Override
+    public void showProgress(int message) {
+
+    }
+
+    @Override
+    public void dismiss() {
+
+    }
+
+    @Override
     public void showFailureError(int message) {
 
     }
 
     @Override
-    public void registered() {
+    public void registered(BaseResponse response) throws Exception {
 
     }
 }

@@ -6,12 +6,14 @@
     android:orientation="vertical">
 
     <Spinner
+        android:id="@+id/category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/category"
         android:padding="@dimen/ten_dp" />
 
     <Spinner
+        android:id="@+id/skill"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/twenty_dp"
@@ -19,6 +21,7 @@
         android:padding="@dimen/ten_dp" />
 
     <Spinner
+        android:id="@+id/qualification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/twenty_dp"
