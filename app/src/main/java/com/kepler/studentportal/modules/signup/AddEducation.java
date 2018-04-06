@@ -2,10 +2,11 @@ package com.kepler.studentportal.modules.signup;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -46,9 +47,12 @@ public class AddEducation extends BaseActivity {
     EditText et_grade;
     @BindView(R.id.et_avg)
     EditText et_avg;
+//    @BindView(R.id.pursuing)
+//    CheckBox pursuing;
     @BindView(R.id.b_add)
     Button b_add;
-    JSONObject jsonObject=new JSONObject();
+    JSONObject jsonObject = new JSONObject();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,9 +66,11 @@ public class AddEducation extends BaseActivity {
                     setDisabled(et_stream);
                     setDisabled(et_pcb);
                     setDisabled(et_pcm);
+//                    pursuing.setVisibility(View.GONE);
                     break;
                 case R.id.add_intermediate:
                     setTitle(R.string.add_intermediate);
+//                    pursuing.setVisibility(View.GONE);
                     break;
                 case R.id.add_graduation:
                     setTitle(R.string.add_graduation);
@@ -80,10 +86,21 @@ public class AddEducation extends BaseActivity {
                     onBackPressed();
             }
         }
+//        pursuing.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (isChecked) {
+//                    spinner.setVisibility(View.GONE);
+//                } else {
+//                    spinner.setVisibility(View.VISIBLE);
+//                }
+//            }
+//        });
         b_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (spinner.getSelectedItemPosition()==0) {
+//                if (!pursuing.isChecked() && spinner.getSelectedItemPosition() == 0) {
+                if (spinner.getSelectedItemPosition() == 0) {
                     showToast(R.string.select_passing_year);
                     spinner.requestFocus();
                     return;
@@ -118,24 +135,25 @@ public class AddEducation extends BaseActivity {
                     et_grade.requestFocus();
                     return;
                 }
-                if (et_avg.getText().toString().trim().isEmpty()) {
-                    et_avg.setError(getString(R.string.err_field_is_empty));
-                    et_avg.requestFocus();
-                    return;
-                }
+//                if (et_avg.getText().toString().trim().isEmpty()) {
+//                    et_avg.setError(getString(R.string.err_field_is_empty));
+//                    et_avg.requestFocus();
+//                    return;
+//                }
                 try {
-                    jsonObject.put(PASSING_YEAR,(String)spinner.getSelectedItem());
-                    jsonObject.put(BOARD_UNIVERSITY,et_board.getText().toString().trim());
-                    jsonObject.put(SCHOOL_COLLEGE,et_school.getText().toString().trim());
-                    jsonObject.put(STREAM,et_stream.getText().toString().trim());
-                    jsonObject.put(PCM_MARKS,et_pcm.getText().toString().trim());
-                    jsonObject.put(PCB_MARKS,et_pcb.getText().toString().trim());
-                    jsonObject.put(CLASS_DIVISION_GRADE,et_grade.getText().toString().trim());
-                    jsonObject.put(AVG_MARKS,et_avg.getText().toString().trim());
-                    Intent bundle=new Intent();
-                    bundle.putExtra(DATA,jsonObject.toString());
-                    setResult(Activity.RESULT_OK,bundle);
-                }catch (Exception e){
+                    jsonObject.put(PASSING_YEAR, spinner.getSelectedItem());
+//                    jsonObject.put(PASSING_YEAR, (pursuing.isChecked()) ? getString(R.string.pursuing) : spinner.getSelectedItem());
+                    jsonObject.put(BOARD_UNIVERSITY, et_board.getText().toString().trim());
+                    jsonObject.put(SCHOOL_COLLEGE, et_school.getText().toString().trim());
+                    jsonObject.put(STREAM, et_stream.getText().toString().trim());
+                    jsonObject.put(PCM_MARKS, et_pcm.getText().toString().trim());
+                    jsonObject.put(PCB_MARKS, et_pcb.getText().toString().trim());
+                    jsonObject.put(CLASS_DIVISION_GRADE, et_grade.getText().toString().trim());
+                    jsonObject.put(AVG_MARKS, et_avg.getText().toString().trim());
+                    Intent bundle = new Intent();
+                    bundle.putExtra(DATA, jsonObject.toString().substring(0, jsonObject.toString().length()));
+                    setResult(Activity.RESULT_OK, bundle);
+                } catch (Exception e) {
 
                 }
                 onBackPressed();

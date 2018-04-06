@@ -16,4 +16,6 @@ public class Constants {
     public static final java.lang.String PCB_MARKS = "pcb_marks";
     public static final java.lang.String CLASS_DIVISION_GRADE = "class_division_grade";
     public static final java.lang.String AVG_MARKS = "avg_marks";
+    public static final java.lang.String EMAIL = "email";
+    public static final java.lang.String CONTACT = "contact";
 }

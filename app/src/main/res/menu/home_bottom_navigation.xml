@@ -25,16 +25,17 @@
 
 
     <item
-        android:id="@+id/action_profile"
-        android:enabled="true"
-        android:icon="@android:drawable/ic_menu_myplaces"
-        android:title="@string/edit_profile"
-        app:showAsAction="ifRoom" />
-
-    <item
         android:id="@+id/action_contact"
         android:enabled="true"
-        android:icon="@android:drawable/sym_contact_card"
+        android:icon="@android:drawable/ic_menu_call"
         android:title="@string/contact_us"
+        app:showAsAction="ifRoom" />
+
+
+    <item
+        android:id="@+id/action_download_result"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_menu_revert"
+        android:title="@string/result"
         app:showAsAction="ifRoom" />
 </menu>

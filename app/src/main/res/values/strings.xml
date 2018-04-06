@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Amity Placement\nApp</string>
+    <string name="default_notification_channel_id">12123</string>
     <string name="okay">Okay</string>
     <string name="sure">Sure</string>
     <string name="confirm">Confirm</string>
@@ -73,10 +74,17 @@
     <string name="add">Add</string>
     <string name="NA">NA</string>
     <string name="select_passing_year">Please Select Passing Year</string>
+    <string name="passing_year">Passing Year</string>
     <string name="registered">Registered</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="update">Update</string>
     <string name="updated">Updated</string>
+    <string name="general_details">General Details</string>
+    <string name="add_working_exp">Add Working Experience</string>
+    <string name="update_contact">Change Contact</string>
+    <string name="change_email">Change Email Id</string>
+    <string name="result">Result</string>
+    <string name="pursuing">Pursuing</string>
 
     <!--arrays-->
     <string-array name="category">

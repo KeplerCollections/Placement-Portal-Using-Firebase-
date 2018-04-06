@@ -32,4 +32,9 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.4.0'
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'com.nex3z:flow-layout:1.2.2'
+    compile "com.google.firebase:firebase-core:$rootProject.ext.playServicesVersion"
+    compile "com.google.firebase:firebase-messaging:$rootProject.ext.playServicesVersion"
 }
+
+// Add to the bottom of the file
+apply plugin: 'com.google.gms.google-services'

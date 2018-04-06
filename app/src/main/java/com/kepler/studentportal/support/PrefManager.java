@@ -13,6 +13,7 @@ import static com.kepler.studentportal.api.ApiClient.USERNAME;
 public class PrefManager {
 
     private static final String PREF_NAME = "my_app_pref";
+    private static final String REG_ID = "ah_app_reg_id";
     private static PrefManager prefManager;
     private static SharedPreferences shardPref;
 
@@ -53,5 +54,17 @@ public class PrefManager {
             return shardPref.getString(USERNAME,null);
         }
         return null;
+    }
+
+    /*store */
+    public void storeRegIdInPref(String token) {
+        if (shardPref != null) {
+            shardPref.edit().putString(REG_ID, token).apply();
+        }
+    }
+
+    /*get reg is regestered*/
+    public String getRegId() {
+        return (shardPref == null) ? null : shardPref.getString(REG_ID, null);
     }
 }

@@ -21,6 +21,14 @@
 
         </Spinner>
 
+        <CheckBox
+            android:id="@+id/pursuing"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:text="@string/pursuing" />
+
         <EditText
             android:id="@+id/et_board"
             style="@style/DarkTextAppearanceMedium"
@@ -49,9 +57,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/ten_dp"
-            android:inputType="text"
             android:background="@drawable/edit_text"
             android:hint="@string/stream"
+            android:inputType="text"
             android:lines="1" />
 
         <EditText
@@ -84,9 +92,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/ten_dp"
-            android:inputType="text"
             android:background="@drawable/edit_text"
             android:hint="@string/grade"
+            android:inputType="text"
             android:lines="1" />
 
         <EditText

@@ -196,6 +196,14 @@
             android:layout_height="@dimen/one_dp"
             android:background="@color/colorGrey" />
 
+        <LinearLayout
+            android:id="@+id/ll_education"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
         <com.nex3z.flowlayout.FlowLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -248,66 +256,19 @@
                 android:tag="16"
                 android:text="@string/add_post_graduation" />
 
+            <TextView
+                android:id="@+id/add_experience"
+                style="@style/DarkTextAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/five_dp"
+                android:background="@drawable/button_selector"
+                android:clickable="true"
+                android:tag="999"
+                android:padding="@dimen/five_dp"
+                android:text="@string/add_working_exp"/>
 
         </com.nex3z.flowlayout.FlowLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_education"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-        </LinearLayout>
-
-        <TextView
-            style="@style/DarkTextAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/ten_dp"
-            android:text="@string/working_experience"
-            android:textAllCaps="true"
-            android:textColor="@color/colorGrey" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/one_dp"
-            android:background="@color/colorGrey" />
-
-        <EditText
-            android:id="@+id/et_experience"
-            style="@style/DarkTextAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/ten_dp"
-            android:background="@drawable/edit_text"
-            android:hint="@string/hm_experience"
-            android:inputType="phone"
-            android:lines="1"
-            android:maxLength="2" />
-
-
-        <EditText
-            android:id="@+id/et_company"
-            style="@style/DarkTextAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/ten_dp"
-            android:background="@drawable/edit_text"
-            android:hint="@string/last_company"
-            android:inputType="text"
-            android:lines="1" />
-
-
-        <EditText
-            android:id="@+id/et_designation"
-            style="@style/DarkTextAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/ten_dp"
-            android:background="@drawable/edit_text"
-            android:hint="@string/last_designation"
-            android:inputType="text"
-            android:lines="1" />
 
         <CheckBox
             android:id="@+id/terms_and_condition"

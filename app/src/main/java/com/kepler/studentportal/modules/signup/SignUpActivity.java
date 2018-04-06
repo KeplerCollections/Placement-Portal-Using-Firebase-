@@ -19,9 +19,7 @@ import com.kepler.studentportal.R;
 import com.kepler.studentportal.VPLogiv;
 import com.kepler.studentportal.api.BaseResponse;
 import com.kepler.studentportal.dao.User;
-import com.kepler.studentportal.modules.home.HomeActivity;
 import com.kepler.studentportal.modules.login.LoginActivity;
-import com.kepler.studentportal.support.PrefManager;
 
 import org.json.JSONObject;
 
@@ -35,10 +33,11 @@ import static com.kepler.studentportal.support.Constants.TITLE;
 
 public class SignUpActivity extends MVPActivity<VPLogiv.SignUpPresenter> implements VPLogiv.SignUpView, View.OnClickListener {
 
-    private static final int HIGH_SCHOOL = 10;
-    private static final int INTERMEDIATE = 12;
-    private static final int GRADUATION = 14;
-    private static final int POST_GRADUATION = 16;
+    public static final int HIGH_SCHOOL = 10;
+    public static final int INTERMEDIATE = 12;
+    public static final int GRADUATION = 14;
+    public static final int POST_GRADUATION = 16;
+    public static final int ADD_EXPERIENCE = 999;
     @BindView(R.id.b_register)
     Button b_register;
     @BindView(R.id.et_first_name)
@@ -61,19 +60,16 @@ public class SignUpActivity extends MVPActivity<VPLogiv.SignUpPresenter> impleme
     TextView add_graduation;
     @BindView(R.id.add_post_graduation)
     TextView add_post_graduation;
+    @BindView(R.id.add_experience)
+    TextView add_experience;
     @BindView(R.id.ll_education)
     LinearLayout ll_education;
-    @BindView(R.id.et_experience)
-    EditText et_experience;
-    @BindView(R.id.et_company)
-    EditText et_company;
-    @BindView(R.id.et_designation)
-    EditText et_designation;
     @BindView(R.id.terms_and_condition)
     CheckBox terms_and_condition;
     private HashMap<String, View> integerViewHashMap = new HashMap<>();
-    private JSONObject qualification=new JSONObject();
+    private JSONObject qualification = new JSONObject();
     private Bundle bundle;
+    private String[] experience = null;
 
     @Override
     protected VPLogiv.SignUpPresenter createPresenter() {
@@ -84,12 +80,13 @@ public class SignUpActivity extends MVPActivity<VPLogiv.SignUpPresenter> impleme
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         enableBackButton();
-        bundle=getIntent().getExtras();
-        setTitle((bundle==null)? R.string.sign_up : bundle.getInt(TITLE,R.string.sign_up));
+        bundle = getIntent().getExtras();
+        setTitle((bundle == null) ? R.string.sign_up : bundle.getInt(TITLE, R.string.sign_up));
         add_highschool.setOnClickListener(this);
         add_intermediate.setOnClickListener(this);
         add_graduation.setOnClickListener(this);
         add_post_graduation.setOnClickListener(this);
+        add_experience.setOnClickListener(this);
         b_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,23 +130,12 @@ public class SignUpActivity extends MVPActivity<VPLogiv.SignUpPresenter> impleme
                     add_graduation.requestFocus();
                     return;
                 }
-                if (add_post_graduation.getVisibility() == View.VISIBLE) {
-                    showToast(R.string.add_post_graduation);
-                    add_post_graduation.requestFocus();
-                    return;
-                }
-                if (!et_experience.getText().toString().trim().isEmpty()) {
-                    if (et_company.getText().toString().trim().isEmpty()) {
-                        et_company.setError(getString(R.string.err_field_is_empty));
-                        et_company.requestFocus();
-                        return;
-                    }
-                    if (et_designation.getText().toString().trim().isEmpty()) {
-                        et_designation.setError(getString(R.string.err_field_is_empty));
-                        et_designation.requestFocus();
-                        return;
-                    }
-                }
+//                if (add_post_graduation.getVisibility() == View.VISIBLE) {
+//                    showToast(R.string.add_post_graduation);
+//                    add_post_graduation.requestFocus();
+//                    return;
+//                }
+
                 if (!terms_and_condition.isChecked()) {
                     terms_and_condition.setError(getString(R.string.err_field_is_empty));
                     terms_and_condition.requestFocus();
@@ -161,11 +147,11 @@ public class SignUpActivity extends MVPActivity<VPLogiv.SignUpPresenter> impleme
                         et_password.getText().toString().trim(),
                         et_email.getText().toString().trim(),
                         findViewById(gender.getCheckedRadioButtonId()).getTag().toString(),
-                        et_experience.getText().toString().trim(),
-                        et_company.getText().toString().trim(),
-                        et_designation.getText().toString().trim(),
+                        (experience ==null) ? "0" : experience[0],
+                        (experience ==null) ? "0" : experience[1],
+                        (experience ==null) ? "0" : experience[2],
                         qualification.toString()
-                        ));
+                ));
             }
         });
     }
@@ -203,66 +189,82 @@ public class SignUpActivity extends MVPActivity<VPLogiv.SignUpPresenter> impleme
 
     @Override
     public void onClick(View v) {
-        Bundle bundle=new Bundle();
-        bundle.putInt(KEY,v.getId());
+        Bundle bundle = new Bundle();
+        bundle.putInt(KEY, v.getId());
         switch (v.getId()) {
             case R.id.add_highschool:
-                startActivity(AddEducation.class,bundle,HIGH_SCHOOL);
+                startActivity(AddEducation.class, bundle, HIGH_SCHOOL);
                 break;
             case R.id.add_intermediate:
-                startActivity(AddEducation.class,bundle,INTERMEDIATE);
+                startActivity(AddEducation.class, bundle, INTERMEDIATE);
                 break;
             case R.id.add_graduation:
-                startActivity(AddEducation.class,bundle,GRADUATION);
+                startActivity(AddEducation.class, bundle, GRADUATION);
                 break;
             case R.id.add_post_graduation:
-                startActivity(AddEducation.class,bundle,POST_GRADUATION);
+                startActivity(AddEducation.class, bundle, POST_GRADUATION);
+                break;
+            case R.id.add_experience:
+                startActivity(AddExperience.class, bundle, ADD_EXPERIENCE);
                 break;
         }
     }
 
     private void addView(TextView button, int sTitle) {
         if (!integerViewHashMap.containsKey(button.getTag())) {
-            View view = getLayoutInflater().inflate(R.layout.education_list, null);
-            TextView title = view.findViewById(R.id.title);
-            ImageButton delete = view.findViewById(R.id.delete);
-            title.setText(sTitle);
-            delete.setTag(button.getTag());
-            delete.setOnClickListener(new MyClickListener());
-            integerViewHashMap.put((String) button.getTag(), view);
-            ll_education.addView(integerViewHashMap.get(button.getTag()));
-        }else {
+            integerViewHashMap.put((String) button.getTag(), addView((String) button.getTag(), sTitle));
+            addView(integerViewHashMap.get(button.getTag()));
+        } else {
             integerViewHashMap.get(button.getTag()).setVisibility(View.VISIBLE);
         }
     }
 
+    private View addView(String tag, int sTitle) {
+        View view = getLayoutInflater().inflate(R.layout.education_list, null);
+        TextView title = view.findViewById(R.id.title);
+        ImageButton delete = view.findViewById(R.id.delete);
+        title.setText(sTitle);
+        delete.setTag(tag);
+        delete.setOnClickListener(new MyClickListener());
+        return view;
+    }
+
+    private void addView(View view) {
+        ll_education.addView(view);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode == Activity.RESULT_OK){
+        if (resultCode == Activity.RESULT_OK) {
             try {
-                switch (requestCode){
+                switch (requestCode) {
                     case HIGH_SCHOOL:
-                        qualification.put(String.valueOf(HIGH_SCHOOL),data.getStringExtra(DATA));
-                        addView(add_highschool,R.string.highschool);
+                        qualification.put(String.valueOf(HIGH_SCHOOL), new JSONObject(data.getStringExtra(DATA)));
+                        addView(add_highschool, R.string.highschool);
                         add_highschool.setVisibility(View.GONE);
                         break;
                     case INTERMEDIATE:
-                        qualification.put(String.valueOf(INTERMEDIATE),data.getStringExtra(DATA));
-                        addView(add_intermediate,R.string.intermediate);
+                        qualification.put(String.valueOf(INTERMEDIATE), new JSONObject(data.getStringExtra(DATA)));
+                        addView(add_intermediate, R.string.intermediate);
                         add_intermediate.setVisibility(View.GONE);
                         break;
                     case GRADUATION:
-                        qualification.put(String.valueOf(GRADUATION),data.getStringExtra(DATA));
-                        addView(add_graduation,R.string.graduation);
+                        qualification.put(String.valueOf(GRADUATION), new JSONObject(data.getStringExtra(DATA)));
+                        addView(add_graduation, R.string.graduation);
                         add_graduation.setVisibility(View.GONE);
                         break;
                     case POST_GRADUATION:
-                        qualification.put(String.valueOf(POST_GRADUATION),data.getStringExtra(DATA));
-                        addView(add_post_graduation,R.string.post_graduation);
+                        qualification.put(String.valueOf(POST_GRADUATION), new JSONObject(data.getStringExtra(DATA)));
+                        addView(add_post_graduation, R.string.post_graduation);
                         add_post_graduation.setVisibility(View.GONE);
                         break;
+                    case ADD_EXPERIENCE:
+                        experience = data.getStringExtra(DATA).split(",");
+                        addView(addView((String) add_experience.getTag(), R.string.working_experience));
+                        add_experience.setVisibility(View.GONE);
+                        break;
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
 
             }
         }
@@ -302,6 +304,11 @@ public class SignUpActivity extends MVPActivity<VPLogiv.SignUpPresenter> impleme
                     integerViewHashMap.get(v.getTag()).setVisibility(View.GONE);
                     ll_education.removeView(v);
                     add_post_graduation.setVisibility(View.VISIBLE);
+                    break;
+                case "999":
+                    experience=null;
+                    ll_education.removeView(v);
+                    add_experience.setVisibility(View.VISIBLE);
                     break;
             }
         }

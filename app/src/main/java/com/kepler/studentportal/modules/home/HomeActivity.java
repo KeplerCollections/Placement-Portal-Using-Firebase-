@@ -16,9 +16,9 @@ import com.kepler.studentportal.modules.Job.Jobs;
 import com.kepler.studentportal.modules.forgot_password.fragment.ChangePassword;
 import com.kepler.studentportal.modules.home.fragment.Company;
 import com.kepler.studentportal.modules.home.fragment.ContactUs;
-import com.kepler.studentportal.modules.home.fragment.Profile;
 import com.kepler.studentportal.modules.home.fragment.Search;
 import com.kepler.studentportal.modules.login.LoginActivity;
+import com.kepler.studentportal.modules.profile.ProfileActivity;
 import com.kepler.studentportal.support.PrefManager;
 
 import butterknife.BindView;
@@ -52,9 +52,7 @@ public class HomeActivity extends BaseActivity {
                             case R.id.action_contact:
                                 replaceFragment(ContactUs.getInstance(), null, false);
                                 break;
-                            case R.id.action_profile:
-                                replaceFragment(Profile.getInstance(), null, false);
-                                break;
+
                         }
                         return true;
                     }
@@ -120,7 +118,9 @@ public class HomeActivity extends BaseActivity {
                     }
                 });
                 return true;
-
+            case R.id.action_profile:
+                startActivity(ProfileActivity.class);
+                break;
             case R.id.action_change_password:
                 Bundle bundle=new Bundle();
                 bundle.putString(USERNAME, PrefManager.getPrefrences(getApplicationContext()).getUsername());

@@ -168,6 +168,13 @@ public abstract class BaseFragment extends Fragment {
         startActivity(intent);
     }
 
+    protected void startActivity(@NonNull Class<? extends BaseActivity> aClass, Bundle bundle,int request_code) {
+        Intent intent = new Intent(getActivity(), aClass);
+        if (bundle != null)
+            intent.putExtras(bundle);
+        startActivityForResult(intent,request_code);
+    }
+
     protected void startActivity(@NonNull Class<? extends BaseActivity> aClass, int flags) {
         Intent intent = new Intent(getActivity(), aClass);
         intent.setFlags(flags);
