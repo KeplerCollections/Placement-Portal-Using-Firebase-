@@ -58,7 +58,7 @@ public interface ApiService {
     @GET("controller.php?action=search")
     Call<ApiResponse<JobDetails>> search(@Query(CATEGORY) String category,@Query(SKILL) String skill,@Query(QUALIFICATION) String qualification);
 
-    @GET("Engagement Book.xlsx")
+    @GET("Results WAT (24.08.2017).xlsx")
     Call<ResponseBody> downloadResult();
 
 }

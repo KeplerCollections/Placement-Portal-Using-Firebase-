@@ -22,6 +22,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Calendar;
 
 import butterknife.BindView;
 import okhttp3.ResponseBody;
@@ -74,6 +75,7 @@ public class Resullt extends MVPFragment<VPLogiv.ResultViewPresenter> implements
                 try {
                     startActivity(pdfOpenintent);
                 } catch (ActivityNotFoundException e) {
+                    showFailureError(R.string.app_not_found);
 
                 }
             }
@@ -127,7 +129,7 @@ public class Resullt extends MVPFragment<VPLogiv.ResultViewPresenter> implements
             // todo change the file location/name according to your needs
             String path = Environment.getExternalStorageDirectory().toString() + "/.ah_am_result";
 
-            File futureStudioIconFile = new File(path + File.separator + "result" + ".xlsx");
+            File futureStudioIconFile = new File(path + File.separator + Calendar.getInstance().getTime() + ".xlsx");
 
             InputStream inputStream = null;
             OutputStream outputStream = null;
