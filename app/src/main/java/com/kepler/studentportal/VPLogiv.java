@@ -27,7 +27,7 @@ public class VPLogiv {
     }
 
     public interface LoginPresenter extends MVP.BasePresenter<LoginView> {
-        void login(String username,String password);
+        void login(String username,String password,String passing_year);
     }
 
     /********* Logic for SiginUp activity ************/

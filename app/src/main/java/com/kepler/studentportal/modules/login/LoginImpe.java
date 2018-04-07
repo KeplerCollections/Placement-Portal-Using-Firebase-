@@ -19,11 +19,11 @@ import retrofit2.Response;
 public class LoginImpe extends BasePresenterImpl<VPLogiv.LoginView> implements VPLogiv.LoginPresenter, Callback<BaseResponse>{
 
     @Override
-    public void login(String username, String password) {
+    public void login(String username, String password,String passing_year) {
         if (view == null)
             return;
         view.showProgress(R.string.authenticating);
-        ApiClient.getClientService().login(username, password).enqueue(this);
+        ApiClient.getClientService().login(username, password,passing_year).enqueue(this);
     }
 
     @Override

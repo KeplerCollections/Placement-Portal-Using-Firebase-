@@ -85,6 +85,8 @@
     <string name="change_email">Change Email Id</string>
     <string name="result">Result</string>
     <string name="pursuing">Pursuing</string>
+    <string name="unable_to_update">Unable to update</string>
+    <string name="pls_enter_pcm_pcb">Please Enter PCM or PCB Marks</string>
 
     <!--arrays-->
     <string-array name="category">

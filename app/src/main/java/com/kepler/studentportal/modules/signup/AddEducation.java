@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -47,7 +45,7 @@ public class AddEducation extends BaseActivity {
     EditText et_grade;
     @BindView(R.id.et_avg)
     EditText et_avg;
-//    @BindView(R.id.pursuing)
+    //    @BindView(R.id.pursuing)
 //    CheckBox pursuing;
     @BindView(R.id.b_add)
     Button b_add;
@@ -120,14 +118,9 @@ public class AddEducation extends BaseActivity {
                     et_stream.requestFocus();
                     return;
                 }
-                if (et_pcm.getText().toString().trim().isEmpty()) {
-                    et_pcm.setError(getString(R.string.err_field_is_empty));
+                if (et_pcm.getText().toString().trim().isEmpty() && et_pcb.getText().toString().trim().isEmpty()) {
+                    showToast(R.string.pls_enter_pcm_pcb);
                     et_pcm.requestFocus();
-                    return;
-                }
-                if (et_pcb.getText().toString().trim().isEmpty()) {
-                    et_pcb.setError(getString(R.string.err_field_is_empty));
-                    et_pcb.requestFocus();
                     return;
                 }
                 if (et_grade.getText().toString().trim().isEmpty()) {

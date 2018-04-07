@@ -16,6 +16,8 @@ import com.kepler.studentportal.modules.home.HomeActivity;
 import com.kepler.studentportal.modules.signup.SignUpActivity;
 import com.kepler.studentportal.support.PrefManager;
 
+import java.util.Calendar;
+
 import butterknife.BindView;
 
 public class LoginActivity extends MVPActivity<VPLogiv.LoginPresenter> implements VPLogiv.LoginView, View.OnClickListener {
@@ -80,7 +82,7 @@ public class LoginActivity extends MVPActivity<VPLogiv.LoginPresenter> implement
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.b_login:
-                presenter.login(et_username.getText().toString(), et_password.getText().toString());
+                presenter.login(et_username.getText().toString(), et_password.getText().toString(), String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
                 break;
             case R.id.b_signup:
                 startActivity(SignUpActivity.class);

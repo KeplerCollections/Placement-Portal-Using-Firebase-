@@ -19,6 +19,7 @@ import static com.kepler.studentportal.api.ApiClient.PASSWORD;
 import static com.kepler.studentportal.api.ApiClient.QUALIFICATION;
 import static com.kepler.studentportal.api.ApiClient.SKILL;
 import static com.kepler.studentportal.api.ApiClient.USERNAME;
+import static com.kepler.studentportal.support.Constants.PASSING_YEAR;
 
 /**
  * Created by kepler on 2/4/18.
@@ -28,7 +29,7 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("controller.php?action=login")
-    Call<BaseResponse> login(@Field(USERNAME) String user_name, @Field(PASSWORD) String password);
+    Call<BaseResponse> login(@Field(USERNAME) String user_name, @Field(PASSWORD) String passwordn, @Field(PASSING_YEAR) String passing_year);
 
     @POST("controller.php?action=register")
     Call<BaseResponse> register(@Body User user);

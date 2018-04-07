@@ -35,12 +35,13 @@ public class User implements Parcelable{
     @Expose
     private String qualification;
     @Expose
+    private String passing_year;
+    @Expose
     private String date;
     @Expose
     private String status;
 
-
-    public User(String first_name, String last_name, String contact, String password, String email_id, String gender, String experience, String last_company, String last_designation, String qualification) {
+    public User(String first_name, String last_name, String contact, String password, String email_id, String gender, String experience, String last_company, String last_designation, String qualification,String passing_year) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.contact = contact;
@@ -51,6 +52,7 @@ public class User implements Parcelable{
         this.last_company = last_company;
         this.last_designation = last_designation;
         this.qualification = qualification;
+        this.passing_year = passing_year;
     }
 
     protected User(Parcel in) {

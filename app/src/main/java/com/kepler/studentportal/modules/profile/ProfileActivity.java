@@ -13,7 +13,6 @@ import com.kepler.studentportal.R;
 import com.kepler.studentportal.VPLogiv;
 import com.kepler.studentportal.api.ApiResponse;
 import com.kepler.studentportal.dao.User;
-import com.kepler.studentportal.modules.home.fragment.ProfileImpe;
 import com.kepler.studentportal.modules.signup.AddEducation;
 import com.kepler.studentportal.modules.signup.AddExperience;
 import com.kepler.studentportal.support.PrefManager;
@@ -27,10 +26,13 @@ import static com.kepler.studentportal.modules.signup.SignUpActivity.GRADUATION;
 import static com.kepler.studentportal.modules.signup.SignUpActivity.HIGH_SCHOOL;
 import static com.kepler.studentportal.modules.signup.SignUpActivity.INTERMEDIATE;
 import static com.kepler.studentportal.modules.signup.SignUpActivity.POST_GRADUATION;
+import static com.kepler.studentportal.support.Constants.BOARD_UNIVERSITY;
 import static com.kepler.studentportal.support.Constants.CONTACT;
 import static com.kepler.studentportal.support.Constants.DATA;
 import static com.kepler.studentportal.support.Constants.EMAIL;
 import static com.kepler.studentportal.support.Constants.KEY;
+import static com.kepler.studentportal.support.Constants.PASSING_YEAR;
+import static com.kepler.studentportal.support.Constants.SCHOOL_COLLEGE;
 
 public class ProfileActivity extends MVPActivity<VPLogiv.ProfileViewPresenter> implements VPLogiv.ProfileView, View.OnClickListener {
 
@@ -164,9 +166,9 @@ public class ProfileActivity extends MVPActivity<VPLogiv.ProfileViewPresenter> i
     }
 
     public String getEducationDes(JSONObject des) throws Exception {
-        return getString(R.string.school) + " : " + des.getString("school_college")
-                + "\n" + getString(R.string.board) + " : " + des.getString("board_university")
-                + "\n" + getString(R.string.passing_year) + " : " + des.getString("passing_year")
+        return getString(R.string.school) + " : " + des.getString(SCHOOL_COLLEGE)
+                + "\n" + getString(R.string.board) + " : " + des.getString(BOARD_UNIVERSITY)
+                + "\n" + getString(R.string.passing_year) + " : " + des.getString(PASSING_YEAR)
                 ;
     }
 
@@ -183,7 +185,7 @@ public class ProfileActivity extends MVPActivity<VPLogiv.ProfileViewPresenter> i
         switch (v.getId()) {
             case R.id.change_number:
                 if(user==null){
-                    showAlertDialog("Unable to update",null);
+                    showAlertDialog(getString(R.string.unable_to_update),null);
                     return;
                 }
                 bundle.putParcelable(DATA,user);
@@ -191,7 +193,7 @@ public class ProfileActivity extends MVPActivity<VPLogiv.ProfileViewPresenter> i
                 break;
             case R.id.change_email:
                 if(user==null){
-                    showAlertDialog("Unable to update",null);
+                    showAlertDialog(getString(R.string.unable_to_update),null);
                     return;
                 }
                 bundle.putParcelable(DATA,user);
@@ -199,7 +201,7 @@ public class ProfileActivity extends MVPActivity<VPLogiv.ProfileViewPresenter> i
                 break;
             case R.id.add_post_graduation:
                 if(user==null){
-                    showAlertDialog("Unable to update",null);
+                    showAlertDialog(getString(R.string.unable_to_update),null);
                     return;
                 }
                 bundle.putInt(KEY, v.getId());
@@ -207,7 +209,7 @@ public class ProfileActivity extends MVPActivity<VPLogiv.ProfileViewPresenter> i
                 break;
             case R.id.add_experience:
                 if(user==null){
-                    showAlertDialog("Unable to update",null);
+                    showAlertDialog(getString(R.string.unable_to_update),null);
                     return;
                 }
                 startActivity(AddExperience.class, null, ADD_EXPERIENCE);

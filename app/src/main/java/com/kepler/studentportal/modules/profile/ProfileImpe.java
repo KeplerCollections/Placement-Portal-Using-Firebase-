@@ -1,4 +1,4 @@
-package com.kepler.studentportal.modules.home.fragment;
+package com.kepler.studentportal.modules.profile;
 
 import com.kepler.projectsupportlib.BasePresenterImpl;
 import com.kepler.projectsupportlib.Logger;

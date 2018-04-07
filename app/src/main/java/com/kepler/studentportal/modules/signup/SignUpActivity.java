@@ -21,6 +21,7 @@ import com.kepler.studentportal.api.BaseResponse;
 import com.kepler.studentportal.dao.User;
 import com.kepler.studentportal.modules.login.LoginActivity;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -29,6 +30,7 @@ import butterknife.BindView;
 
 import static com.kepler.studentportal.support.Constants.DATA;
 import static com.kepler.studentportal.support.Constants.KEY;
+import static com.kepler.studentportal.support.Constants.PASSING_YEAR;
 import static com.kepler.studentportal.support.Constants.TITLE;
 
 public class SignUpActivity extends MVPActivity<VPLogiv.SignUpPresenter> implements VPLogiv.SignUpView, View.OnClickListener {
@@ -70,6 +72,7 @@ public class SignUpActivity extends MVPActivity<VPLogiv.SignUpPresenter> impleme
     private JSONObject qualification = new JSONObject();
     private Bundle bundle;
     private String[] experience = null;
+    private String passing_year = null;
 
     @Override
     protected VPLogiv.SignUpPresenter createPresenter() {
@@ -141,17 +144,22 @@ public class SignUpActivity extends MVPActivity<VPLogiv.SignUpPresenter> impleme
                     terms_and_condition.requestFocus();
                     return;
                 }
-                presenter.register(new User(et_first_name.getText().toString().trim(),
-                        et_last_name.getText().toString().trim(),
-                        et_contact.getText().toString().trim(),
-                        et_password.getText().toString().trim(),
-                        et_email.getText().toString().trim(),
-                        findViewById(gender.getCheckedRadioButtonId()).getTag().toString(),
-                        (experience ==null) ? "0" : experience[0],
-                        (experience ==null) ? "0" : experience[1],
-                        (experience ==null) ? "0" : experience[2],
-                        qualification.toString()
-                ));
+                try {
+                    presenter.register(new User(et_first_name.getText().toString().trim(),
+                            et_last_name.getText().toString().trim(),
+                            et_contact.getText().toString().trim(),
+                            et_password.getText().toString().trim(),
+                            et_email.getText().toString().trim(),
+                            findViewById(gender.getCheckedRadioButtonId()).getTag().toString(),
+                            (experience ==null) ? "0" : experience[0],
+                            (experience ==null) ? "0" : experience[1],
+                            (experience ==null) ? "0" : experience[2],
+                             qualification.toString(),
+                            (qualification.has(String.valueOf(POST_GRADUATION)) ? qualification.getJSONObject(String.valueOf(POST_GRADUATION)).getString(PASSING_YEAR):qualification.getJSONObject(String.valueOf(GRADUATION)).getString(PASSING_YEAR))
+                    ));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
