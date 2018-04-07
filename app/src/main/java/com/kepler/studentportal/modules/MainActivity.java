@@ -18,11 +18,7 @@ public class MainActivity extends BaseActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (PrefManager.getPrefrences(getApplicationContext()).isInSession()) {
-                    startActivity(HomeActivity.class);
-                } else {
-                    startActivity(LoginActivity.class);
-                }
+                startActivity(MultiplePermissionsActivity.class);
                 finish();
             }
         }, 2000);

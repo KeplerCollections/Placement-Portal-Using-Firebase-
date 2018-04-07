@@ -5,6 +5,9 @@ import com.kepler.studentportal.api.ApiResponse;
 import com.kepler.studentportal.api.BaseResponse;
 import com.kepler.studentportal.dao.User;
 
+import okhttp3.ResponseBody;
+import retrofit2.Response;
+
 /**
  * Created by kepler on 28/3/18.
  */
@@ -101,6 +104,15 @@ public class VPLogiv {
     public interface ProfileViewPresenter extends MVP.BasePresenter<ProfileView> {
         void getUser(String username);
         void updateUser(User user);
+    }
+
+    /********* Logic for profile************/
+    public interface ResultView extends APIBase {
+        void updateView(Response<ResponseBody> response) throws Exception;
+    }
+
+    public interface ResultViewPresenter extends MVP.BasePresenter<ResultView> {
+        void downloadFile();
     }
 
 

@@ -16,6 +16,7 @@ import com.kepler.studentportal.modules.Job.Jobs;
 import com.kepler.studentportal.modules.forgot_password.fragment.ChangePassword;
 import com.kepler.studentportal.modules.home.fragment.Company;
 import com.kepler.studentportal.modules.home.fragment.ContactUs;
+import com.kepler.studentportal.modules.home.fragment.Resullt;
 import com.kepler.studentportal.modules.home.fragment.Search;
 import com.kepler.studentportal.modules.login.LoginActivity;
 import com.kepler.studentportal.modules.profile.ProfileActivity;
@@ -51,6 +52,9 @@ public class HomeActivity extends BaseActivity {
                                 break;
                             case R.id.action_contact:
                                 replaceFragment(ContactUs.getInstance(), null, false);
+                                break;
+                            case R.id.action_download_result:
+                                replaceFragment(Resullt.getInstance(), null, false);
                                 break;
 
                         }

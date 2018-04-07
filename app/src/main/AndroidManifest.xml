@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kepler.studentportal">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -45,6 +47,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".modules.profile.UpdateDetails"
+            android:screenOrientation="portrait" />
+ <activity
+            android:name=".modules.MultiplePermissionsActivity"
             android:screenOrientation="portrait" />
 
         <!-- push notification related classes -->

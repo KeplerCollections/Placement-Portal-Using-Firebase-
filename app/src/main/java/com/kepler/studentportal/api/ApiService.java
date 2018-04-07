@@ -4,6 +4,7 @@ import com.kepler.studentportal.dao.CompanyDetails;
 import com.kepler.studentportal.dao.JobDetails;
 import com.kepler.studentportal.dao.User;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -56,5 +57,8 @@ public interface ApiService {
 
     @GET("controller.php?action=search")
     Call<ApiResponse<JobDetails>> search(@Query(CATEGORY) String category,@Query(SKILL) String skill,@Query(QUALIFICATION) String qualification);
+
+    @GET("Engagement Book.xlsx")
+    Call<ResponseBody> downloadResult();
 
 }

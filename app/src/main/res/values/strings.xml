@@ -87,6 +87,8 @@
     <string name="pursuing">Pursuing</string>
     <string name="unable_to_update">Unable to update</string>
     <string name="pls_enter_pcm_pcb">Please Enter PCM or PCB Marks</string>
+    <string name="refresh">Refresh</string>
+    <string name="downloading">Downloading</string>
 
     <!--arrays-->
     <string-array name="category">
