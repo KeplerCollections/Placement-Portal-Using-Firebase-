@@ -157,6 +157,7 @@ public class MultiplePermissionsActivity extends BaseActivity {
         } else {
             startActivity(LoginActivity.class);
         }
+        finish();
     }
  
     @Override

@@ -1,9 +1,11 @@
 package com.kepler.studentportal.modules.home.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
@@ -13,11 +15,12 @@ import com.kepler.studentportal.R;
 import com.kepler.studentportal.VPLogiv;
 import com.kepler.studentportal.api.ApiResponse;
 import com.kepler.studentportal.dao.JobDetails;
+import com.kepler.studentportal.dao.Program;
+import com.kepler.studentportal.dao.ProgramCategoty;
 import com.kepler.studentportal.modules.Job.JobActivity;
 import com.kepler.studentportal.support.Constants;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 
@@ -35,9 +38,12 @@ public class Search extends MVPFragment<VPLogiv.SearchViewPresenter> implements 
     Spinner skill;
     @BindView(R.id.qualification)
     Spinner qualification;
-    public static Search getInstance(){
+    private ArrayAdapter adapter;
+
+    public static Search getInstance() {
         return new Search();
     }
+
     @Override
     protected String getFragmentTitle() {
         return getResources().getString(R.string.search);
@@ -51,10 +57,40 @@ public class Search extends MVPFragment<VPLogiv.SearchViewPresenter> implements 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Logger.e("onItemSelected:" + position);
+                setParentAdapter(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Logger.e("onNothingSelected:");
+
+            }
+        });
+        skill.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Logger.e("onItemSelected:" + position);
+                setAdapter();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Logger.e("onNothingSelected:");
+
+            }
+        });
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.search((String) category.getSelectedItem(),(String) skill.getSelectedItem(),(String) qualification.getSelectedItem());
+                if (category.getSelectedItemPosition() == 0) {
+                    showAlert(getString(R.string.err_select_category));
+                    return;
+                }
+                presenter.search(String.valueOf(((Program) qualification.getSelectedItem()).getId()));
             }
         });
     }
@@ -77,20 +113,42 @@ public class Search extends MVPFragment<VPLogiv.SearchViewPresenter> implements 
 
     @Override
     public void showFailureError(int message) {
-        fragmentCommunicator.showDialog(message,null, Logger.DIALOG_ERROR);
+        fragmentCommunicator.showDialog(null,getString(message), null, Logger.DIALOG_ERROR);
 
     }
 
 
     @Override
     public void updateView(ApiResponse response) throws Exception {
-        if(response.isStatus()){
-            Bundle bundle=new Bundle();
-            bundle.putString(Constants.TITLE,getResources().getString(R.string.search));
+        if (response.isStatus()) {
+            Bundle bundle = new Bundle();
+            bundle.putString(Constants.TITLE, getResources().getString(R.string.search));
             bundle.putParcelableArrayList(Constants.DATA, (ArrayList<JobDetails>) response.getData());
-            startActivity(JobActivity.class,bundle);
-        }else {
-            fragmentCommunicator.showDialog(response.getMessage(),null, Logger.DIALOG_ALERT);
+            startActivity(JobActivity.class, bundle);
+        } else {
+            fragmentCommunicator.showDialog(null,response.getMessage(), null, Logger.DIALOG_ALERT);
         }
     }
+
+    @Override
+    public Context getAppContext() {
+        return getActivity().getApplicationContext();
+    }
+
+    public void setParentAdapter(int position) {
+        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, presenter.getProgramCategory(--position));
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        skill.setAdapter(adapter);
+        if (position == -1)
+            setAdapter();
+    }
+
+    public void setAdapter() {
+        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, presenter.getProgram((skill.getSelectedItem() == null) ? 0 : ((ProgramCategoty) skill.getSelectedItem()).getId()));
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        qualification.setAdapter(adapter);
+
+    }
+
+
 }

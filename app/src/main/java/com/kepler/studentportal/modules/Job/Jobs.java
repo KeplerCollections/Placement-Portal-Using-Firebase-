@@ -95,7 +95,7 @@ public class Jobs extends MVPFragment<VPLogiv.JobViewPresenter> implements VPLog
 
     @Override
     public void showFailureError(int message) {
-        fragmentCommunicator.showDialog(message,null, Logger.DIALOG_ERROR);
+        fragmentCommunicator.showDialog(null,getString(message),null, Logger.DIALOG_ERROR);
 
     }
 
@@ -105,7 +105,7 @@ public class Jobs extends MVPFragment<VPLogiv.JobViewPresenter> implements VPLog
         if(response.isStatus()){
             initAdapter(response.getData());
         }else{
-            fragmentCommunicator.showDialog(response.getMessage(),null, Logger.DIALOG_ALERT);
+            fragmentCommunicator.showDialog(null,response.getMessage(),null, Logger.DIALOG_ALERT);
         }
     }
 }

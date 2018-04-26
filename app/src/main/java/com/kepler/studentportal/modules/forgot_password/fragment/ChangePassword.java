@@ -84,7 +84,7 @@ public class ChangePassword extends MVPFragment<VPLogiv.ChangePasswordPresenter>
 
     @Override
     public void showFailureError(int message) {
-        fragmentCommunicator.showDialog(message, null, Logger.DIALOG_ERROR);
+        fragmentCommunicator.showDialog(null,getString(message), null, Logger.DIALOG_ERROR);
 
     }
 
@@ -96,7 +96,7 @@ public class ChangePassword extends MVPFragment<VPLogiv.ChangePasswordPresenter>
             startActivity(LoginActivity.class);
             getActivity().finish();
         } else {
-            fragmentCommunicator.showDialog(response.getMessage(), null, Logger.DIALOG_ALERT);
+            fragmentCommunicator.showDialog(null,response.getMessage(), null, Logger.DIALOG_ALERT);
         }
     }
 }

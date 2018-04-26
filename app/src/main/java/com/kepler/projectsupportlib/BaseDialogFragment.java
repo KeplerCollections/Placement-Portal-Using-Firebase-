@@ -27,18 +27,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
 
     private static final String TAG = BaseDialogFragment.class.getSimpleName();
     private View view;
-    protected FragmentCommunicator fragmentCommunicator;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
+    private FragmentCommunicator fragmentCommunicator;
 
     @Override
     public void onDestroyView() {
@@ -63,8 +52,11 @@ public abstract class BaseDialogFragment extends DialogFragment {
         setFragmentTitle(getFragmentTitle());
     }
 
-    protected abstract String getFragmentTitle();
+    protected abstract int getFragmentTitle();
 
+    private void setFragmentTitle(int title) {
+        fragmentCommunicator.setFragmentTitle(title);
+    }
 
     protected void setFragmentTitle(String title) {
         fragmentCommunicator.setFragmentTitle(title);
@@ -135,7 +127,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
         replaceFragment(fragment, bundle, true);
     }
 
-    protected void replaceFragment(Fragment fragment, Bundle bundle, boolean addTo) {
+    private void replaceFragment(Fragment fragment, Bundle bundle, boolean addTo) {
         fragmentCommunicator.replaceFragment(fragment, bundle, addTo);
     }
 
@@ -148,7 +140,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
         addFragment(fragment, null, addToStack);
     }
 
-    protected void addFragment(Fragment fragment, Bundle bundle, boolean addToStack) {
+    private void addFragment(Fragment fragment, Bundle bundle, boolean addToStack) {
         fragmentCommunicator.addFragment(fragment, bundle, addToStack);
     }
 

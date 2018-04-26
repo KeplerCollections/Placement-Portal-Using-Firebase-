@@ -1,9 +1,15 @@
 package com.kepler.studentportal;
 
+import android.content.Context;
+
 import com.kepler.projectsupportlib.MVP;
 import com.kepler.studentportal.api.ApiResponse;
 import com.kepler.studentportal.api.BaseResponse;
+import com.kepler.studentportal.dao.Program;
+import com.kepler.studentportal.dao.ProgramCategoty;
 import com.kepler.studentportal.dao.User;
+
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Response;
@@ -90,10 +96,13 @@ public class VPLogiv {
     /********* Logic for search************/
     public interface SearchView extends APIBase {
         void updateView(ApiResponse response) throws Exception;
+        Context getAppContext();
     }
 
     public interface SearchViewPresenter extends MVP.BasePresenter<SearchView> {
-        void search(String category,String skill,String qualification);
+        void search(String qualification);
+        List<ProgramCategoty> getProgramCategory(int is_technical);
+        List<Program> getProgram(int progran_category_id);
     }
 
     /********* Logic for profile************/

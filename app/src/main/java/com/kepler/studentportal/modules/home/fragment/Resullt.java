@@ -101,7 +101,7 @@ public class Resullt extends MVPFragment<VPLogiv.ResultViewPresenter> implements
 
     @Override
     public void showFailureError(int message) {
-        fragmentCommunicator.showDialog(message, null, Logger.DIALOG_ERROR);
+        fragmentCommunicator.showDialog(null,getString(message), null, Logger.DIALOG_ERROR);
 
     }
 
@@ -112,7 +112,7 @@ public class Resullt extends MVPFragment<VPLogiv.ResultViewPresenter> implements
             writeResponseBodyToDisk(response.body());
             setAdapter();
         } else {
-            fragmentCommunicator.showDialog(response.message(), null, Logger.DIALOG_ALERT);
+            fragmentCommunicator.showDialog(null,response.message(), null, Logger.DIALOG_ALERT);
         }
     }
 

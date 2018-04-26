@@ -85,7 +85,7 @@ public class ProfileActivity extends MVPActivity<VPLogiv.ProfileViewPresenter> i
 
     @Override
     public void showProgress(int message) {
-        showProgressDialog(message);
+        showProgressBar(message);
     }
 
     @Override
@@ -189,7 +189,7 @@ public class ProfileActivity extends MVPActivity<VPLogiv.ProfileViewPresenter> i
                     return;
                 }
                 bundle.putParcelable(DATA,user);
-                startActivity(UpdateDetails.class, bundle, UPDATE);
+                startActivityForResult(UpdateDetails.class, bundle, UPDATE);
                 break;
             case R.id.change_email:
                 if(user==null){
@@ -197,7 +197,7 @@ public class ProfileActivity extends MVPActivity<VPLogiv.ProfileViewPresenter> i
                     return;
                 }
                 bundle.putParcelable(DATA,user);
-                startActivity(UpdateDetails.class, bundle, UPDATE);
+                startActivityForResult(UpdateDetails.class, bundle, UPDATE);
                 break;
             case R.id.add_post_graduation:
                 if(user==null){
@@ -205,14 +205,14 @@ public class ProfileActivity extends MVPActivity<VPLogiv.ProfileViewPresenter> i
                     return;
                 }
                 bundle.putInt(KEY, v.getId());
-                startActivity(AddEducation.class, bundle, POST_GRADUATION);
+                startActivityForResult(AddEducation.class, bundle, POST_GRADUATION);
                 break;
             case R.id.add_experience:
                 if(user==null){
                     showAlertDialog(getString(R.string.unable_to_update),null);
                     return;
                 }
-                startActivity(AddExperience.class, null, ADD_EXPERIENCE);
+                startActivityForResult(AddExperience.class, null, ADD_EXPERIENCE);
                 break;
         }
     }

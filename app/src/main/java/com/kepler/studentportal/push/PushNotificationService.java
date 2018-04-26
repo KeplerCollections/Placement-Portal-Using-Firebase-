@@ -9,12 +9,16 @@ import android.support.annotation.Nullable;
 import com.kepler.projectsupportlib.CheckInterNetNetwork;
 import com.kepler.projectsupportlib.Logger;
 import com.kepler.studentportal.api.ApiClient;
+import com.kepler.studentportal.api.BaseResponse;
 import com.kepler.studentportal.push.dao.PushResponse;
 import com.kepler.studentportal.support.PrefManager;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -37,8 +41,10 @@ public class PushNotificationService extends Service {
     public void onCreate() {
         super.onCreate();
         reg_id = PrefManager.getPrefrences(getApplicationContext()).getRegId();
-        if (reg_id == null)
+        if (reg_id == null) {
             stopSelf();
+            return;
+        }
         startCheckInTimer();
     }
 
@@ -62,20 +68,21 @@ public class PushNotificationService extends Service {
     }
 
     private synchronized void pushKey() {
-//        ApiClient.getClientService().sendRegistrationToServer(reg_id, reg_id, PrefManager.getInstance(getApplicationContext()).getCountryCode()).enqueue(new Callback<PushResponse>() {
-//            @Override
-//            public void onResponse(Call<PushResponse> call, Response<PushResponse> response) {
-//               if (response.isSuccessful() && response.body().getStatus()) {
-//                    PrefManager.getInstance(getApplicationContext()).storeREG_IDCheck(true);
-//                    stopSelf();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<PushResponse> call, Throwable t) {
-//                Logger.print(t);
-//            }
-//        });
+        ApiClient.getClientService().sendTokenToServer(reg_id).enqueue(new Callback<BaseResponse>() {
+
+            @Override
+            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                if (response.isSuccessful() && response.body().isStatus()) {
+                    stopSelf();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse> call, Throwable t) {
+                Logger.e(t.getMessage());
+                stopSelf();
+            }
+        });
     }
 
     private void startCheckInTimer() {

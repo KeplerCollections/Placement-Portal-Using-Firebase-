@@ -50,7 +50,7 @@ public class VerifyOtp extends BaseFragment{
                   bundle.putString(USERNAME, getArguments().getString(USERNAME,null));
                   fragmentCommunicator.replaceFragment(ChangePassword.getInstance(),bundle,false);
               }else {
-                  fragmentCommunicator.showDialog(R.string.invalid_otp,null, Logger.DIALOG_ALERT);
+                  fragmentCommunicator.showDialog(null,getString(R.string.invalid_otp),null, Logger.DIALOG_ALERT);
               }
           }
       });

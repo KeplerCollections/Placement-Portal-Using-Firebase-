@@ -69,7 +69,7 @@ public class Otp extends MVPFragment<VPLogiv.FpOtpSendPresenter> implements VPLo
 
     @Override
     public void showFailureError(int message) {
-        fragmentCommunicator.showDialog(message,null, Logger.DIALOG_ERROR);
+        fragmentCommunicator.showDialog(null,getString(message),null, Logger.DIALOG_ERROR);
 
     }
 
@@ -82,7 +82,7 @@ public class Otp extends MVPFragment<VPLogiv.FpOtpSendPresenter> implements VPLo
             bundle.putString(ApiClient.USERNAME,et_username.getText().toString());
             fragmentCommunicator.replaceFragment(VerifyOtp.getInstance(), bundle, false);
         } else {
-            fragmentCommunicator.showDialog(response.getMessage(),null, Logger.DIALOG_ALERT);
+            fragmentCommunicator.showDialog(null,response.getMessage(),null, Logger.DIALOG_ALERT);
         }
     }
 }

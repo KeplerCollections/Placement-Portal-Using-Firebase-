@@ -67,7 +67,7 @@ public class Company extends MVPFragment<VPLogiv.CompanyViewPresenter> implement
 
     @Override
     public void showFailureError(int message) {
-        fragmentCommunicator.showDialog(message,null, Logger.DIALOG_ERROR);
+        fragmentCommunicator.showDialog(null,getString(message),null, Logger.DIALOG_ERROR);
 
     }
 
@@ -89,7 +89,7 @@ public class Company extends MVPFragment<VPLogiv.CompanyViewPresenter> implement
             rv_list.setLayoutManager(horizontalLayoutManager);
             rv_list.setAdapter(companyAdapter);
         }else {
-            fragmentCommunicator.showDialog(response.getMessage(),null, Logger.DIALOG_ALERT);
+            fragmentCommunicator.showDialog(null,response.getMessage(),null, Logger.DIALOG_ALERT);
         }
     }
 }

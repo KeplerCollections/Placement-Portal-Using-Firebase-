@@ -19,6 +19,7 @@ import static com.kepler.studentportal.api.ApiClient.OTP;
 import static com.kepler.studentportal.api.ApiClient.PASSWORD;
 import static com.kepler.studentportal.api.ApiClient.QUALIFICATION;
 import static com.kepler.studentportal.api.ApiClient.SKILL;
+import static com.kepler.studentportal.api.ApiClient.TOKEN;
 import static com.kepler.studentportal.api.ApiClient.USERNAME;
 import static com.kepler.studentportal.support.Constants.PASSING_YEAR;
 
@@ -31,6 +32,10 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("controller.php?action=login")
     Call<BaseResponse> login(@Field(USERNAME) String user_name, @Field(PASSWORD) String passwordn, @Field(PASSING_YEAR) String passing_year);
+
+    @FormUrlEncoded
+    @POST("controller.php?action=savePushId")
+    Call<BaseResponse> sendTokenToServer(@Field(TOKEN) String token);
 
     @POST("controller.php?action=register")
     Call<BaseResponse> register(@Body User user);
@@ -56,7 +61,7 @@ public interface ApiService {
     Call<BaseResponse> changePassword(@Field(USERNAME) String user_name, @Field(PASSWORD) String password);
 
     @GET("controller.php?action=search")
-    Call<ApiResponse<JobDetails>> search(@Query(CATEGORY) String category,@Query(SKILL) String skill,@Query(QUALIFICATION) String qualification);
+    Call<ApiResponse<JobDetails>> search(@Query(QUALIFICATION) String qualification);
 
     @GET("Results WAT (24.08.2017).xlsx")
     Call<ResponseBody> downloadResult();

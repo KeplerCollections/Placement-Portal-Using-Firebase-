@@ -36,4 +36,6 @@ public abstract class MVPActivity<T extends MVP.BasePresenter> extends BaseActiv
         super.onCreate(savedInstanceState);
     }
 
+
+
 }

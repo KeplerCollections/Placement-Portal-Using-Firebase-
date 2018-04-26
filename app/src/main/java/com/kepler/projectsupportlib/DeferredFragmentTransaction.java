@@ -2,7 +2,7 @@ package com.kepler.projectsupportlib;
 
 import android.support.v4.app.Fragment;
 
-public abstract class DeferredFragmentTransaction {
+abstract class DeferredFragmentTransaction {
 
     private int contentFrameId;
     private Fragment replacingFragment;

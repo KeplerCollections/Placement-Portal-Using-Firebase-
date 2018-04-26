@@ -90,16 +90,22 @@
     <string name="refresh">Refresh</string>
     <string name="downloading">Downloading</string>
     <string name="app_not_found">No application found to open this document.</string>
+    <string name="program_category">Program Category</string>
+    <string name="program">Program</string>
+    <string name="err_select_category">Please Select Category</string>
+    <string name="see_job">See Job</string>
 
     <!--arrays-->
     <string-array name="category">
-        <item>IT</item>
+        <item>Select</item>
+        <item>Non Technical</item>
+        <item>Technical</item>
     </string-array>
-    <string-array name="skill">
-        <item>JAVA</item>
+    <string-array name="program">
+
     </string-array>
     <string-array name="qualification">
-        <item>MCA</item>
+
     </string-array>
     <string-array name="year">
         <item>Select Year Of Passing</item>

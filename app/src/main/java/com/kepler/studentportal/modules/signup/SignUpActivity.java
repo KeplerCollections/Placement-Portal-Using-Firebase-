@@ -201,19 +201,19 @@ public class SignUpActivity extends MVPActivity<VPLogiv.SignUpPresenter> impleme
         bundle.putInt(KEY, v.getId());
         switch (v.getId()) {
             case R.id.add_highschool:
-                startActivity(AddEducation.class, bundle, HIGH_SCHOOL);
+                startActivityForResult(AddEducation.class, bundle, HIGH_SCHOOL);
                 break;
             case R.id.add_intermediate:
-                startActivity(AddEducation.class, bundle, INTERMEDIATE);
+                startActivityForResult(AddEducation.class, bundle, INTERMEDIATE);
                 break;
             case R.id.add_graduation:
-                startActivity(AddEducation.class, bundle, GRADUATION);
+                startActivityForResult(AddEducation.class, bundle, GRADUATION);
                 break;
             case R.id.add_post_graduation:
-                startActivity(AddEducation.class, bundle, POST_GRADUATION);
+                startActivityForResult(AddEducation.class, bundle, POST_GRADUATION);
                 break;
             case R.id.add_experience:
-                startActivity(AddExperience.class, bundle, ADD_EXPERIENCE);
+                startActivityForResult(AddExperience.class, bundle, ADD_EXPERIENCE);
                 break;
         }
     }

@@ -6,11 +6,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -24,13 +27,14 @@ import java.util.Queue;
 
 import butterknife.ButterKnife;
 
-import static com.kepler.projectsupportlib.Logger.DIALOG_ALERT;
+import static com.kepler.projectsupportlib.Logger.DIALOG_CONFIRM;
 import static com.kepler.projectsupportlib.Logger.DIALOG_ERROR;
 
 public abstract class BaseActivity extends AppCompatActivity implements FragmentCommunicator {
 
     //in your Activity
-    Queue<DeferredFragmentTransaction> deferredFragmentTransactions = new ArrayDeque<>();
+    private final Queue<DeferredFragmentTransaction> deferredFragmentTransactions = new ArrayDeque<>();
+    private DividerItemDecoration divider;
     private ProgressDialog dialog;
     private SharedPreferences srdPrf;
     private boolean isRunning;
@@ -42,6 +46,15 @@ public abstract class BaseActivity extends AppCompatActivity implements Fragment
         ButterKnife.bind(this);
     }
 
+    protected void openInBrowser(String url) {
+        try {
+            Intent intent = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse(url));
+            startActivity(intent);
+        } catch (Exception e) {
+
+        }
+    }
 
 
     protected void hideToolbar() {
@@ -100,12 +113,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Fragment
         Intent intent = new Intent(this, aClass);
         startActivity(intent);
     }
-    protected void startActivity(@NonNull Class<? extends BaseActivity> aClass, Bundle bundle,int request_code) {
-        Intent intent = new Intent(this, aClass);
-        if (bundle != null)
-            intent.putExtras(bundle);
-        startActivityForResult(intent,request_code);
-    }
 
     protected void startActivity(@NonNull Class<? extends BaseActivity> aClass, int flags) {
         Intent intent = new Intent(this, aClass);
@@ -121,19 +128,34 @@ public abstract class BaseActivity extends AppCompatActivity implements Fragment
         startActivity(intent);
     }
 
+    protected void startActivityForResult(@NonNull Class<? extends BaseActivity> aClass, Bundle bundle, int request_code) {
+        Intent intent = new Intent(this, aClass);
+        if (bundle != null)
+            intent.putExtras(bundle);
+        startActivityForResult(intent, request_code);
+    }
+
 
     protected void showToast(int message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
+    protected void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
 
-    protected void showProgressDialog(int msg) {
+
+    private void showProgressDialog(int msg) {
         if (dialog == null) {
             dialog = new ProgressDialog(this);
             dialog.setCancelable(false);
+            dialog.setMessage(getResources().getString(msg));
+            dialog.show();
+        } else if (!dialog.isShowing()) {
+            dialog.setMessage(getResources().getString(msg));
+            dialog.show();
         }
-        dialog.setMessage(getResources().getString(msg));
-        dialog.show();
+
     }
 
     private void dismiss() {
@@ -196,26 +218,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Fragment
         transaction.commit();
     }
 
-    protected void showConfirmationDialog(String message, DialogInterface.OnClickListener listener) {
-        showSimpleAlert(R.string.confirm, message, R.string.sure, listener, R.string.cancel, null, false);
-    }
-
-    protected void showAlertDialog(String message, DialogInterface.OnClickListener listener) {
-        showSimpleAlert(R.string.alert, message, R.string.okay, listener, 0, null, false);
-    }
-
-    protected void showErrorDialog(String message, DialogInterface.OnClickListener listener) {
-        showSimpleAlert(R.string.error, message, R.string.okay, listener, 0, null, false);
-    }
-
-    private void showSimpleAlert(int title, String message, int positiveBtnTextId, DialogInterface.OnClickListener positiveBtnListener, int negativeBtnTextId, DialogInterface.OnClickListener negativeBtnListener, boolean isCancelable) {
-        if (negativeBtnTextId == 0) {
-            new AlertDialog.Builder(this).setTitle(title).setMessage(message).setPositiveButton(positiveBtnTextId, positiveBtnListener).setCancelable(isCancelable).create().show();
-        } else {
-            new AlertDialog.Builder(this).setTitle(title).setMessage(message).setPositiveButton(positiveBtnTextId, positiveBtnListener).setNegativeButton(negativeBtnTextId, negativeBtnListener).setCancelable(isCancelable).create().show();
-        }
-    }
-
     @Override
     protected void onDestroy() {
         dialog = null;
@@ -243,8 +245,15 @@ public abstract class BaseActivity extends AppCompatActivity implements Fragment
     }
 
     @Override
+    public void setFragmentTitle(int title) {
+        if (title != 0)
+            setTitle(title);
+    }
+
+    @Override
     public void setFragmentTitle(String title) {
-        setTitle(title);
+        if (title != null)
+            setTitle(title);
     }
 
     @Override
@@ -258,27 +267,53 @@ public abstract class BaseActivity extends AppCompatActivity implements Fragment
     }
 
     @Override
-    public void showDialog(int message, DialogInterface.OnClickListener onClickListener, int dialogType) {
-        switch (dialogType){
-            case DIALOG_ERROR:
-                showErrorDialog(getResources().getString(message), onClickListener);
-                break;
-            case DIALOG_ALERT:
-                showAlertDialog(getResources().getString(message), onClickListener);
-                break;
-        }
-    }
-    @Override
-    public void showDialog(String message, DialogInterface.OnClickListener onClickListener, int dialogType) {
-        switch (dialogType){
+    public void showDialog(String title, String message, DialogInterface.OnClickListener onClickListener, int dialogType) {
+        switch (dialogType) {
             case DIALOG_ERROR:
                 showErrorDialog(message, onClickListener);
                 break;
-            case DIALOG_ALERT:
-                showAlertDialog(message, onClickListener);
+            case DIALOG_CONFIRM:
+                showConfirmDialog((title == null) ? getString(R.string.confirm) : title, message, R.string.okay, onClickListener, R.string.cancel, null);
                 break;
+            default:
+                showAlertDialog(message, onClickListener);
         }
     }
+
+    @Override
+    public void showDialog(String title, String message, int positiveBtn, DialogInterface.OnClickListener positiveBtnListner, int negativeBtn, DialogInterface.OnClickListener negativeBtnListener, int dialogType) {
+        switch (dialogType) {
+            case DIALOG_ERROR:
+                showErrorDialog(message, positiveBtnListner);
+                break;
+            case DIALOG_CONFIRM:
+                showConfirmDialog((title == null) ? getString(R.string.confirm) : title, message, positiveBtn, positiveBtnListner, negativeBtn, negativeBtnListener);
+                break;
+            default:
+                showAlertDialog(message, positiveBtnListner);
+        }
+    }
+
+    protected void showAlertDialog(String message, DialogInterface.OnClickListener listener) {
+        showSimpleAlert(getString(R.string.alert), message, R.string.okay, listener, 0, null, false);
+    }
+
+    protected void showConfirmDialog(String title, String message, int positiveBtnTextId, DialogInterface.OnClickListener positiveBtnListener, int negativeBtnTextId, DialogInterface.OnClickListener negativeBtnListener) {
+        showSimpleAlert((title==null) ?getString(R.string.confirm) : title, message, positiveBtnTextId, positiveBtnListener, negativeBtnTextId, negativeBtnListener, false);
+    }
+
+    protected void showErrorDialog(String message, DialogInterface.OnClickListener listener) {
+        showSimpleAlert(getString(R.string.error), message, R.string.okay, listener, 0, null, false);
+    }
+
+    private void showSimpleAlert(String title, String message, int positiveBtnTextId, DialogInterface.OnClickListener positiveBtnListener, int negativeBtnTextId, DialogInterface.OnClickListener negativeBtnListener, boolean isCancelable) {
+        if (negativeBtnTextId == 0) {
+            new AlertDialog.Builder(this).setTitle(title).setMessage(message).setPositiveButton(positiveBtnTextId, positiveBtnListener).setCancelable(isCancelable).create().show();
+        } else {
+            new AlertDialog.Builder(this).setTitle(title).setMessage(message).setPositiveButton(positiveBtnTextId, positiveBtnListener).setNegativeButton(negativeBtnTextId, negativeBtnListener).setCancelable(isCancelable).create().show();
+        }
+    }
+
 
     //    @Override
 //    public void replaceFragment(Fragment fragment, boolean addTo) {
@@ -308,6 +343,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Fragment
     protected boolean isInternetAvailable() {
         return CheckInterNetNetwork.isInternetAvailable(getApplicationContext());
     }
+
 
     protected abstract ProgressBar getHorizontalProgressBar();
 

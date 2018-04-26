@@ -1,7 +1,6 @@
 package com.kepler.studentportal.push;
 
 import android.app.ActivityManager;
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
@@ -9,10 +8,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Build;
+import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
-import android.text.Html;
 import android.text.TextUtils;
 import android.util.Patterns;
 
@@ -24,14 +22,12 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
-
-import static com.kepler.studentportal.support.Utility.getTimeMilliSec;
-
+import java.util.Random;
 
 public class NotificationUtils {
-    public static final int NOTIFICATION_ID = 100;
-    public static final int NOTIFICATION_ID_BIG_IMAGE = 101;
-    private static String TAG = NotificationUtils.class.getSimpleName();
+
+    private final static String TAG = NotificationUtils.class.getSimpleName();
+    private final static String CHANNEL_ID = "amity_channel_1";
 
     private Context mContext;
 
@@ -73,114 +69,52 @@ public class NotificationUtils {
         notificationManager.cancelAll();
     }
 
-    public void showNotificationMessage(String title, String message, String timeStamp, Intent intent) {
-        showNotificationMessage(title, message, timeStamp, intent, null);
-    }
 
-    public void showNotificationMessage(final String title, final String message, final String timeStamp, Intent intent, String imageUrl) {
+    public void showNotificationMessage(final String title, final String message, Intent resultIntent, String imageUrl) {
         // Check for empty push message
         if (TextUtils.isEmpty(message))
             return;
 
+        /**Creates an explicit intent for an Activity in your app**/
+//        Intent resultIntent = new Intent(mContext , SomeOtherActivity.class);
+//        resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        // notification icon
-        final int icon = R.mipmap.ic_launcher;
+        PendingIntent resultPendingIntent = PendingIntent.getActivity(mContext,
+                0 /* Request code */, resultIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
 
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        final PendingIntent resultPendingIntent =
-                PendingIntent.getActivity(
-                        mContext,
-                        0,
-                        intent,
-                        PendingIntent.FLAG_CANCEL_CURRENT
-                );
+        final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mContext, CHANNEL_ID);
+        mBuilder
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setLargeIcon(BitmapFactory.decodeResource(mContext.getResources(), R.mipmap.ic_launcher_round))
+                .setContentTitle(title)
+                .setColor(mContext.getResources().getColor(R.color.colorLightOpacityGrey))
+                .setContentText(message)
+                .setAutoCancel(true)
+                .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
+                .setContentIntent(resultPendingIntent);
 
-        final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
-                mContext);
 
-//        final Uri alarmSound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE
-//                + "://" + mContext.getPackageName() + "/raw/notification");
+        if (!TextUtils.isEmpty(imageUrl) && imageUrl != null && imageUrl.length() > 4 && Patterns.WEB_URL.matcher(imageUrl).matches()) {
 
-        if (!TextUtils.isEmpty(imageUrl)) {
+            Bitmap bitmap = getBitmapFromURL(imageUrl);
 
-            if (imageUrl != null && imageUrl.length() > 4 && Patterns.WEB_URL.matcher(imageUrl).matches()) {
-
-                Bitmap bitmap = getBitmapFromURL(imageUrl);
-
-                if (bitmap != null) {
-                    showBigNotification(bitmap, mBuilder, icon, title, message, timeStamp, resultPendingIntent, null);
-                } else {
-                    showSmallNotification(mBuilder, icon, title, message, timeStamp, resultPendingIntent, null);
-                }
+            if (bitmap != null) {
+                mBuilder.setStyle(new NotificationCompat.BigPictureStyle()
+                        .bigPicture(bitmap).setBigContentTitle(title).setSummaryText(message));
             }
-        } else {
-            showSmallNotification(mBuilder, icon, title, message, timeStamp, resultPendingIntent, null);
-//            playNotificationSound();
         }
-    }
-
-    private void showSmallNotification(NotificationCompat.Builder mBuilder, int icon, String title, String message, String timeStamp, PendingIntent resultPendingIntent, Uri alarmSound) {
-
-        NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
-
-        inboxStyle.addLine(message);
-
-        Notification notification;
-        notification = mBuilder.setSmallIcon(icon).setTicker(title).setWhen(0)
-                .setAutoCancel(true)
-                .setContentTitle(title)
-                .setContentIntent(resultPendingIntent)
-//                .setSound(alarmSound)
-                .setStyle(inboxStyle)
-                .setWhen(getTimeMilliSec(timeStamp))
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setLargeIcon(BitmapFactory.decodeResource(mContext.getResources(), icon))
-                .setContentText(message)
-                .build();
-
         NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(NOTIFICATION_ID, notification);
+        assert notificationManager != null;
+        notificationManager.notify(getNotificationId(), mBuilder.build());
     }
 
-    // Playing notification sound
-//    public void playNotificationSound() {
-//        try {
-//            Uri alarmSound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE
-//                    + "://" + mContext.getPackageName() + "/raw/notification");
-//            Ringtone r = RingtoneManager.getRingtone(mContext, alarmSound);
-//            r.play();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-    private void showBigNotification(Bitmap bitmap, NotificationCompat.Builder mBuilder, int icon, String title, String message, String timeStamp, PendingIntent resultPendingIntent, Uri alarmSound) {
-        NotificationCompat.BigPictureStyle bigPictureStyle = new NotificationCompat.BigPictureStyle();
-        bigPictureStyle.setBigContentTitle(title);
-        bigPictureStyle.setSummaryText(Html.fromHtml(message).toString());
-        bigPictureStyle.bigPicture(bitmap);
-        Notification notification;
-        notification = mBuilder.setSmallIcon(icon).setTicker(title).setWhen(0)
-                .setAutoCancel(true)
-                .setContentTitle(title)
-                .setContentIntent(resultPendingIntent)
-//                .setSound(alarmSound)
-                .setStyle(bigPictureStyle)
-                .setWhen(getTimeMilliSec(timeStamp))
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setLargeIcon(BitmapFactory.decodeResource(mContext.getResources(), icon))
-                .setContentText(message)
-                .build();
-
-        NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(NOTIFICATION_ID_BIG_IMAGE, notification);
-    }
 
     /**
      * Downloading push notification image before displaying it in
      * the notification tray
      */
-    public Bitmap getBitmapFromURL(String strURL) {
+    private Bitmap getBitmapFromURL(String strURL) {
         try {
             URL url = new URL(strURL);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -195,4 +129,7 @@ public class NotificationUtils {
         }
     }
 
+    public int getNotificationId() {
+        return new Random().nextInt(100);
+    }
 }

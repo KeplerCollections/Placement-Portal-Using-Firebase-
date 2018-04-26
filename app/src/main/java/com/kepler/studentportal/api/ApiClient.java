@@ -16,6 +16,7 @@ public class ApiClient {
     public static final String USERNAME="username";
     public static final String USER_ID="userId";
     public static final String PASSWORD="password";
+    public static final String TOKEN="token";
     public static final String OTP="otp";
     private static ApiService service;
 
