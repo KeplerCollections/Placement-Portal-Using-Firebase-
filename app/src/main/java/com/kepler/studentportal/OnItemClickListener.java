@@ -1,4 +1,4 @@
-package com.kepler;
+package com.kepler.studentportal;
 
 /**
  * Created by kepler on 23/3/18.

@@ -12,16 +12,16 @@ import android.support.v4.app.Fragment;
 
 public interface FragmentCommunicator {
 
-    void setFragmentTitle(String title);
+    void setFragmentTitle(int title);
 
+    void setFragmentTitle(String title);
 
     void dismissProgressBar();
 
     void showProgressBar(int message);
 
-    void showDialog(int message, DialogInterface.OnClickListener onClickListener, int dialogType);
-
-    void showDialog(String message, DialogInterface.OnClickListener onClickListener, int dialogType);
+    void showDialog(String title, String message, int positiveBtn, DialogInterface.OnClickListener positiveBtnListner, int negativeBtn, DialogInterface.OnClickListener negativeBtnListener, int dialogType);
+    void showDialog(String title, String message, DialogInterface.OnClickListener onClickListener, int dialogType);
 
     void dismissHorizontalProgress();
 

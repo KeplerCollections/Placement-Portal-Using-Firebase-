@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.kepler.studentportal.modules.signup.AddEducation">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/ten_dp">
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:entries="@array/year">
+
+        </Spinner>
+
+        <CheckBox
+            android:id="@+id/pursuing"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:text="@string/pursuing" />
+
+        <EditText
+            android:id="@+id/et_board"
+            style="@style/DarkTextAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:background="@drawable/edit_text"
+            android:hint="@string/board"
+            android:inputType="text"
+            android:lines="1" />
+
+        <EditText
+            android:id="@+id/et_school"
+            style="@style/DarkTextAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:background="@drawable/edit_text"
+            android:hint="@string/school"
+            android:inputType="text"
+            android:lines="1" />
+
+        <EditText
+            android:id="@+id/et_stream"
+            style="@style/DarkTextAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:background="@drawable/edit_text"
+            android:hint="@string/stream"
+            android:inputType="text"
+            android:lines="1" />
+
+        <EditText
+            android:id="@+id/et_pcm"
+            style="@style/DarkTextAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:background="@drawable/edit_text"
+            android:hint="@string/pcm"
+            android:inputType="number"
+            android:lines="1"
+            android:maxLength="2" />
+
+        <EditText
+            android:id="@+id/et_pcb"
+            style="@style/DarkTextAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:background="@drawable/edit_text"
+            android:hint="@string/pcb"
+            android:inputType="number"
+            android:lines="1"
+            android:maxLength="2" />
+
+        <EditText
+            android:id="@+id/et_grade"
+            style="@style/DarkTextAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:background="@drawable/edit_text"
+            android:hint="@string/grade"
+            android:inputType="text"
+            android:lines="1" />
+
+        <EditText
+            android:id="@+id/et_avg"
+            style="@style/DarkTextAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:background="@drawable/edit_text"
+            android:hint="@string/avg"
+            android:inputType="number"
+            android:lines="1"
+            android:maxLength="2" />
+
+        <Button
+            android:id="@+id/b_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/twenty_dp"
+            android:background="@drawable/button_selector"
+            android:text="@string/add" />
+    </LinearLayout>
+
+</ScrollView>

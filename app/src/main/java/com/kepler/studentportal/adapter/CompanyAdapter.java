@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.kepler.OnItemClickListener;
+import com.kepler.studentportal.OnItemClickListener;
 import com.kepler.studentportal.R;
 import com.kepler.studentportal.dao.CompanyDetails;
 
@@ -39,12 +39,12 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.CompanyV
     @Override
     public void onBindViewHolder(CompanyViewHolder holder, final int position) {
 //        holder.imageView.setImageResource(R.drawable.ic_action_favorite);
-//        holder.bind(detailsList.get(position));
+        holder.bind(detailsList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return detailsList.size();
     }
 
     public class CompanyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -60,12 +60,15 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.CompanyV
         }
 
         public void bind(CompanyDetails companyDetails) {
+            txt_company_name.setText(companyDetails.getCompany_name());
+            txt_company_website.setText(companyDetails.getCompany_website());
+            txt_company_email_id.setText(companyDetails.getCompany_emailid());
+            txt_company_address.setText(companyDetails.getCompany_address());
         }
 
         @Override
         public void onClick(View v) {
-//            onItemClickListener.OnItemClickListener(detailsList.get(getAdapterPosition()));
-            onItemClickListener.OnItemClickListener(null);
+            onItemClickListener.OnItemClickListener(detailsList.get(getAdapterPosition()));
         }
     }
 }

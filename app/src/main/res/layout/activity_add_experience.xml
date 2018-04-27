@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:padding="@dimen/ten_dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.kepler.studentportal.modules.signup.AddExperience">
+
+    <EditText
+        android:id="@+id/et_experience"
+        style="@style/DarkTextAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ten_dp"
+        android:background="@drawable/edit_text"
+        android:hint="@string/hm_experience"
+        android:inputType="phone"
+        android:lines="1"
+        android:maxLength="2" />
+
+
+    <EditText
+        android:id="@+id/et_company"
+        style="@style/DarkTextAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ten_dp"
+        android:background="@drawable/edit_text"
+        android:hint="@string/last_company"
+        android:inputType="text"
+        android:lines="1" />
+
+
+    <EditText
+        android:id="@+id/et_designation"
+        style="@style/DarkTextAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ten_dp"
+        android:background="@drawable/edit_text"
+        android:hint="@string/last_designation"
+        android:inputType="text"
+        android:lines="1" />
+
+    <Button
+        android:id="@+id/b_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/twenty_dp"
+        android:background="@drawable/button_selector"
+        android:text="@string/add" />
+
+</LinearLayout>

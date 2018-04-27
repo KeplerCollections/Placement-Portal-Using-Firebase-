@@ -6,9 +6,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.kepler.projectsupportlib.Logger;
 import com.kepler.projectsupportlib.MVPFragment;
 import com.kepler.studentportal.R;
 import com.kepler.studentportal.VPLogiv;
+import com.kepler.studentportal.api.ApiClient;
+import com.kepler.studentportal.api.BaseResponse;
 
 import butterknife.BindView;
 
@@ -34,18 +37,18 @@ public class Otp extends MVPFragment<VPLogiv.FpOtpSendPresenter> implements VPLo
 
     @Override
     protected VPLogiv.FpOtpSendPresenter createPresenter() {
-        return null;
+        return new OtpImpe();
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-      b_send_otp.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-              otpSent();
-          }
-      });
+        b_send_otp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.sendOtp(et_username.getText().toString(), "123456");
+            }
+        });
     }
 
     @Override
@@ -54,12 +57,32 @@ public class Otp extends MVPFragment<VPLogiv.FpOtpSendPresenter> implements VPLo
     }
 
     @Override
+    public void showProgress(int message) {
+        fragmentCommunicator.showProgressBar(message);
+    }
+
+    @Override
+    public void dismiss() {
+        fragmentCommunicator.dismissProgressBar();
+    }
+
+
+    @Override
     public void showFailureError(int message) {
+        fragmentCommunicator.showDialog(null,getString(message),null, Logger.DIALOG_ERROR);
 
     }
 
     @Override
-    public void otpSent() {
-        fragmentCommunicator.replaceFragment(VerifyOtp.getInstance(),null,false);
+    public void otpSent(BaseResponse response) throws Exception {
+        if (response.isStatus()) {
+            showToast(R.string.otp_sent);
+            Bundle bundle=new Bundle();
+            bundle.putString(ApiClient.OTP,"123456");
+            bundle.putString(ApiClient.USERNAME,et_username.getText().toString());
+            fragmentCommunicator.replaceFragment(VerifyOtp.getInstance(), bundle, false);
+        } else {
+            fragmentCommunicator.showDialog(null,response.getMessage(),null, Logger.DIALOG_ALERT);
+        }
     }
 }

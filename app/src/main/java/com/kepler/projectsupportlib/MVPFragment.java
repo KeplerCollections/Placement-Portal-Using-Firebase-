@@ -32,20 +32,20 @@ public abstract class MVPFragment<T extends MVP.BasePresenter> extends BaseFragm
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        if (this.presenter != null) {
-            this.presenter.attachView(this);
-        }
-    }
-
-    @Override
     public void onDestroyView() {
         super.onDestroyView();
 
         if (this.presenter != null) {
             this.presenter.detachView();
+        }
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        if (this.presenter != null) {
+            this.presenter.attachView(this);
         }
     }
 

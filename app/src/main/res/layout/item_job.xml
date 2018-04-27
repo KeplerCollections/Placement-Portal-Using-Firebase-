@@ -17,19 +17,12 @@
         android:id="@+id/txt_job_website"
         style="@style/DarkTextAppearanceSmall"
         android:layout_width="match_parent"
+        android:autoLink="web"
         android:layout_height="wrap_content"
         android:lines="1"
+        android:clickable="true"
         android:text="www.tcsinfo.com/apply"
         android:textColor="@color/colorBlue" />
-
-    <TextView
-        android:id="@+id/txt_job_email_id"
-        style="@style/DarkTextAppearanceSmall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:lines="1"
-        android:text="tcspvt@info.com"
-        android:textColor="@color/colorGrey" />
 
     <TextView
         android:id="@+id/txt_job_exp"
@@ -39,4 +32,13 @@
         android:maxLines="2"
         android:text="2-4 years"
         android:textColor="@color/colorGrey" />
+
+    <TextView
+        android:id="@+id/txt_job_email_id"
+        style="@style/DarkTextAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="tcspvt@info.com"
+        android:textColor="@color/colorGrey" />
+
 </LinearLayout>

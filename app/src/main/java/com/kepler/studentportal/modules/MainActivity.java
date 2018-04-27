@@ -1,12 +1,14 @@
 package com.kepler.studentportal.modules;
 
-import android.os.Handler;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.ProgressBar;
 
 import com.kepler.projectsupportlib.BaseActivity;
 import com.kepler.studentportal.R;
+import com.kepler.studentportal.modules.home.HomeActivity;
 import com.kepler.studentportal.modules.login.LoginActivity;
+import com.kepler.studentportal.support.PrefManager;
 
 public class MainActivity extends BaseActivity {
 
@@ -16,10 +18,10 @@ public class MainActivity extends BaseActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(LoginActivity.class);
+                startActivity(MultiplePermissionsActivity.class);
                 finish();
             }
-        },2000);
+        }, 2000);
     }
 
     @Override

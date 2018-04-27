@@ -13,12 +13,18 @@ public class Logger {
 
     public static final int DIALOG_ERROR = 1;
     public static final int DIALOG_ALERT = 2;
-    private static final String TAG=Logger.class.getSimpleName();
+    public static final int DIALOG_CONFIRM = 3;
+    private static final String TAG = Logger.class.getSimpleName();
+
+
+    /* print */
     public static void print(Exception e) {
         if (BuildConfig.DEBUG) {
             e.printStackTrace();
         }
-    }public static void print(Throwable e) {
+    }
+
+    public static void print(Throwable e) {
         if (BuildConfig.DEBUG) {
             e.printStackTrace();
         }
@@ -30,21 +36,42 @@ public class Logger {
         }
     }
 
+    /*error */
     public static void e(String TAG, String msg) {
         if (BuildConfig.DEBUG) {
             Log.e(TAG, msg);
         }
-    } public static void d(String TAG, String msg) {
-        if (BuildConfig.DEBUG) {
-            Log.d(TAG, msg);
-        }
-    }public static void e(String msg) {
+    }
+    public static void e(String msg) {
         if (BuildConfig.DEBUG) {
             Log.e(TAG, msg);
         }
-    } public static void d( String msg) {
+    }
+
+    /*debug*/
+    public static void d(String TAG, String msg) {
         if (BuildConfig.DEBUG) {
             Log.d(TAG, msg);
+        }
+    }
+
+    public static void d(String msg) {
+        if (BuildConfig.DEBUG) {
+            Log.d(TAG, msg);
+        }
+    }
+
+
+    /*info*/
+    public static void i(String TAG, String msg) {
+        if (BuildConfig.DEBUG) {
+            Log.i(TAG, msg);
+        }
+    }
+
+    public static void i(String msg) {
+        if (BuildConfig.DEBUG) {
+            Log.i(TAG, msg);
         }
     }
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="@dimen/ten_dp"
+    android:gravity="center_vertical"
+    android:layout_margin="@dimen/five_dp"
+    android:layout_height="wrap_content">
+
+    <ImageButton
+        android:id="@+id/delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text"
+        android:src="@android:drawable/ic_menu_delete"/>
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/DarkTextAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/ten_dp"
+        android:text="@string/working_experience"
+        android:textAllCaps="true"/>
+</LinearLayout>

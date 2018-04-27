@@ -24,8 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/twenty_dp"
         android:background="@drawable/edit_text"
-        android:hint="@string/username"
-        android:inputType="number" />
+        android:hint="@string/email_id"
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/et_password"

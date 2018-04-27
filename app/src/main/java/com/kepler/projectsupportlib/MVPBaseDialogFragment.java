@@ -1,8 +1,6 @@
 package com.kepler.projectsupportlib;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 
 
@@ -24,22 +22,6 @@ public abstract class MVPBaseDialogFragment<T extends MVP.BasePresenter, L> exte
         protected abstract T createPresenter();
 
         @Override
-        public void onCreate(@Nullable Bundle savedInstanceState) {
-                super.onCreate(savedInstanceState);
-
-                this.presenter = this.createPresenter();
-        }
-
-        @Override
-        public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-                super.onViewCreated(view, savedInstanceState);
-
-                if (this.presenter != null) {
-                        this.presenter.attachView(this);
-                }
-        }
-
-        @Override
         public void onDestroyView() {
                 super.onDestroyView();
 
@@ -54,6 +36,17 @@ public abstract class MVPBaseDialogFragment<T extends MVP.BasePresenter, L> exte
 
                 this.presenter = null;
         }
+
+//        // interface to handle the dialog click back to the Activity
+//        public interface OnAlertDialogFragmentClickListener{
+//                void onOkClicked(FeedbackDialog dialog);
+//                void onCancelClicked(FeedbackDialog dialog);
+//        }
+//
+//        public interface OnConfirmDialogFragmentClickListener{
+//                void onOkClicked(FeedbackDialog dialog);
+//                void onCancelClicked(FeedbackDialog dialog);
+//        }
 
         private L mListener;
 

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "880044147298",
+    "firebase_url": "https://myallapptestrun.firebaseio.com",
+    "project_id": "myallapptestrun",
+    "storage_bucket": "myallapptestrun.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:880044147298:android:4d98c6320d80956a",
+        "android_client_info": {
+          "package_name": "com.kepler.studentportal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "880044147298-gf10fpj8moohu53eeon70ssao7de855m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kepler.studentportal",
+            "certificate_hash": "de1856061ee1b6ffd2641d7fe4b3f44d8f6d4afd"
+          }
+        },
+        {
+          "client_id": "880044147298-4mbd2g782rb5ajjqdh4vtpd5l3dj53in.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuTACBqMrvrPUs0tnr77BS-dtSs1CEjbs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "880044147298-4mbd2g782rb5ajjqdh4vtpd5l3dj53in.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

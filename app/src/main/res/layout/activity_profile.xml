@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.kepler.studentportal.modules.profile.ProfileActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/ten_dp">
+
+        <TextView
+            style="@style/DarkTextAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:text="@string/general_details"
+            android:textAllCaps="true"
+            android:textColor="@color/colorGrey" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/one_dp"
+            android:background="@color/colorGrey" />
+
+
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/DarkTextAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:drawableLeft="@android:drawable/ic_menu_myplaces"
+            android:gravity="center_vertical"
+            android:hint="@string/first_name"
+            android:lines="1" />
+
+        <TextView
+            android:id="@+id/tv_email"
+            style="@style/DarkTextAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:drawableLeft="@android:drawable/ic_menu_send"
+            android:gravity="center_vertical"
+            android:hint="@string/email_id"
+            android:lines="1" />
+
+        <TextView
+            android:id="@+id/tv_contact"
+            style="@style/DarkTextAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:drawableLeft="@android:drawable/ic_menu_call"
+            android:gravity="center_vertical"
+            android:hint="@string/contact_no"
+            android:lines="1" />
+
+
+        <TextView
+            style="@style/DarkTextAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:text="@string/education"
+            android:textAllCaps="true"
+            android:textColor="@color/colorGrey" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/one_dp"
+            android:background="@color/colorGrey" />
+
+        <LinearLayout
+            android:id="@+id/ll_education"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/add_post_graduation"
+            style="@style/DarkTextAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/five_dp"
+            android:background="@drawable/button_selector"
+            android:clickable="true"
+            android:padding="@dimen/five_dp"
+            android:tag="16"
+            android:text="@string/add_post_graduation"
+            android:visibility="gone" />
+
+        <TextView
+            style="@style/DarkTextAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:text="@string/working_experience"
+            android:textAllCaps="true"
+            android:textColor="@color/colorGrey" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/one_dp"
+            android:background="@color/colorGrey" />
+
+        <LinearLayout
+            android:id="@+id/ll_experience"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+        <com.nex3z.flowlayout.FlowLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/add_experience"
+                style="@style/DarkTextAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/five_dp"
+                android:background="@drawable/button_selector"
+                android:clickable="true"
+                android:padding="@dimen/five_dp"
+                android:text="@string/add_working_exp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/change_number"
+                style="@style/DarkTextAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/five_dp"
+                android:background="@drawable/button_selector"
+                android:clickable="true"
+                android:text="@string/update_contact"
+                android:padding="@dimen/five_dp" />
+
+            <TextView
+                android:id="@+id/change_email"
+                style="@style/DarkTextAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/five_dp"
+                android:background="@drawable/button_selector"
+                android:clickable="true"
+                android:padding="@dimen/five_dp"
+                android:text="@string/change_email"/>
+
+        </com.nex3z.flowlayout.FlowLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>

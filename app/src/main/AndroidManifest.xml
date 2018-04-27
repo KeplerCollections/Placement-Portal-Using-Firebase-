@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kepler.studentportal">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -25,6 +29,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".modules.home.HomeActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
             android:name=".modules.forgot_password.ForgotPassword"
@@ -32,7 +37,43 @@
         <activity
             android:name=".modules.Job.JobActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".modules.signup.SignUpActivity"></activity>
+        <activity
+            android:name=".modules.signup.SignUpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modules.signup.AddEducation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modules.signup.AddExperience"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modules.profile.UpdateDetails"
+            android:screenOrientation="portrait" />
+ <activity
+            android:name=".modules.MultiplePermissionsActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- push notification related classes -->
+        <service android:name=".push.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".push.MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".push.PushNotificationService" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" />
+        <!-- End push notification related classes -->
+
+        <activity
+            android:name=".modules.profile.ProfileActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

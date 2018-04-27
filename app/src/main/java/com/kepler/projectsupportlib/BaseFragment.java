@@ -3,6 +3,7 @@ package com.kepler.projectsupportlib;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -28,17 +29,15 @@ public abstract class BaseFragment extends Fragment {
     private View view;
     protected FragmentCommunicator fragmentCommunicator;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void openInBrowser(String url){
+        try {
+            Intent intent = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse(url));
+            startActivity(intent);
+        }catch (Exception e){
 
+        }
     }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -64,10 +63,13 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract String getFragmentTitle();
 
-    private void setFragmentTitle(String title) {
+    private void setFragmentTitle(int title) {
         fragmentCommunicator.setFragmentTitle(title);
     }
 
+    protected void setFragmentTitle(String title) {
+        fragmentCommunicator.setFragmentTitle(title);
+    }
 
     @Nullable
     @Override
@@ -134,7 +136,7 @@ public abstract class BaseFragment extends Fragment {
         replaceFragment(fragment, bundle, true);
     }
 
-    protected void replaceFragment(Fragment fragment, Bundle bundle, boolean addTo) {
+    private void replaceFragment(Fragment fragment, Bundle bundle, boolean addTo) {
         fragmentCommunicator.replaceFragment(fragment, bundle, addTo);
     }
 
@@ -147,7 +149,7 @@ public abstract class BaseFragment extends Fragment {
         addFragment(fragment, null, addToStack);
     }
 
-    protected void addFragment(Fragment fragment, Bundle bundle, boolean addToStack) {
+    private void addFragment(Fragment fragment, Bundle bundle, boolean addToStack) {
         fragmentCommunicator.addFragment(fragment, bundle, addToStack);
     }
 
